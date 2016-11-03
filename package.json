@@ -1,0 +1,16 @@
+{
+  "name": "js-by-example",
+  "version": "1.0.0",
+  "description": "Collection of ES6 modules that explain JS concepts",
+  "main": "bind.js",
+  "scripts": {
+    "start": "babel-node"
+  },
+  "author": "Hajime Yamasaki Vukelic <hayavuk@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-runtime": "^6.18.0"
+  }
+}
