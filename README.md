@@ -26,8 +26,10 @@ requests.
 
 ## Getting the sources
 
-To obtain the sources, simply clone this repository. Then run this command in
-the source directory:
+To obtain the sources, simply clone [this repository](
+https://github.com/foxbunny/javascript-by-example/) using git, or [download](
+https://github.com/foxbunny/javascript-by-example/archive/master.zip) it, then
+run this command in the source directory:
 
     npm install
 
