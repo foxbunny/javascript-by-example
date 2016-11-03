@@ -12,6 +12,14 @@ Running the examples is not necessary in order to follow them, though. The
 command output is also noted in the form of comments next to each (relevant)
 line of code.
 
+## Table of contents
+
+- [proto](./proto.js) - Prototypal inheritance and examples of object creation
+and inheritance using several different patterns
+- [not-new](./not-new.js) - An implementation of `new` keyword as a JavaScript
+function to demonstrate how instantiating objects using constructors and
+classes actually works
+
 ## Getting the sources
 
 To obtain the sources, simply clone this repository. Then run this command in
@@ -30,11 +38,3 @@ extension. For example, if you wish to run `proto.js`, you would run this
 command:
 
     npm start -- proto
-
-## Table of contents
-
-- [proto](./proto.js) - Prototypal inheritance and examples of object creation
-  and inheritance using several different patterns
-- [not-new](./not-new.js) - An implementation of `new` keyword as a JavaScript
-  function to demonstrate how instantiating objects using constructors and
-  classes actually works
