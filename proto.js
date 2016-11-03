@@ -7,8 +7,8 @@ import {NOTE} from './_util'
 // With the influx of developers from various backgrounds, the JavaScript scene
 // has been 'enriched' by plenty of confusion around how to do object
 // orientation. The gist of it is that JavaScript OOP is not class-based, and
-// grasping this idea is probably one of the factors that sets great JavaScript
-// developers from not-so-great ones.
+// grasping this idea is probably the key to clearing this confusion up and
+// becoming a better JavaScript programmer.
 
 // The goal of this module is to demonstrate how prototypal inheritance works
 // using working examples, and hopefully shorten the time it takes to master
