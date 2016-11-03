@@ -53,3 +53,12 @@ Please use the [issue tracker](
 https://github.com/foxbunny/javascript-by-example/issues) to report issues with
 the examples or documentation. You are also welcome to submit pull requests
 with fixes or even completely new modules.
+
+## About the author
+
+I am a long-time web developer with over 8 years of experience programming
+in JavaScript. My relationship with JavaScript has started even before frontend
+engineering was *the* thing, scripting Adobe software using the JavaScript
+scripting API. Although I have also done NodeJS development, my main focus
+nowadays is on frontend engineering. I love JavaScript, and lately also writing
+about it.
