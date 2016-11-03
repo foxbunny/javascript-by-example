@@ -38,3 +38,14 @@ extension. For example, if you wish to run `proto.js`, you would run this
 command:
 
     npm start -- proto
+
+## License
+
+This code in this repository is licensed under the MIT license.
+
+## Reporting issues
+
+Please use the [issue tracker](
+https://github.com/foxbunny/javascript-by-example/issues) to report issues with
+the examples or documentation. You are also welcome to submit pull requests
+with fixes or even completely new modules.
