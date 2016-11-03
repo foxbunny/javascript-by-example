@@ -20,6 +20,10 @@ and inheritance using several different patterns
 function to demonstrate how instantiating objects using constructors and
 classes actually works
 
+Have a topic you would like to see covered? Use the [issue tracker](
+https://github.com/foxbunny/javascript-by-example/issues) to submit feature
+requests.
+
 ## Getting the sources
 
 To obtain the sources, simply clone this repository. Then run this command in
