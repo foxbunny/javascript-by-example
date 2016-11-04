@@ -58,7 +58,7 @@ bar.exclaim() // Batman!
 // Hopefully, the `new` keyword has been demystified and you have a better
 // understanding of what exactly it does.
 
-// NOTE: In the example function, the fist and second step can be merged into
+// NOTE: In the example function, the first and second step can be merged into
 // a single `Object.create()` call. This has not been done in order to break
 // down the operations that the `new` keyword performs. A slightly shorter
 // version of the `neo()` function may look like this:
