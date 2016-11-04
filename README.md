@@ -38,12 +38,11 @@ which enables you to run the examples.
 
 ## Running the examples
 
-To run the examples, use `npm start -- [example module]` command, where
-`[example module]` is the module's file name with or without the `.js`
-extension. For example, if you wish to run `proto.js`, you would run this
-command:
+To run the examples, use `npm start [example module]` command, where `[example
+module]` is the module's file name with or without the `.js` extension. For
+example, if you wish to run `proto.js`, you would run this command:
 
-    npm start -- proto
+    npm start proto
 
 ## License
 
