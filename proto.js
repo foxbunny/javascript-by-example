@@ -14,15 +14,15 @@ import {NOTE} from './_util'
 // and hopefully shorten the time it takes for novice JavaScript programmers
 // to master it .
 
-// To get started, let's say we have two objects, `foo` and `bar`.
+// To get started, let's say we have two objects:
 
-let foo = {
+let printer = {
   print() {
     console.log(this.num)
   }
 }
 
-let bar = {
+let counter = {
   increment() {
     this.num += 1
   },
@@ -36,28 +36,28 @@ let bar = {
 // another object. This time the object will only have the `num` property to
 // which the other two objects were referring to.
 
-let baz = {
+let thing = {
   num: 0
 }
 
-// Let's set `baz`'s prototype to `foo` so that we can use the `print()`
+// Let's set `thing`'s prototype to `printer` so that we can use the `print()`
 // function.
 
-Object.setPrototypeOf(baz, foo)
+Object.setPrototypeOf(thing, printer)
 
-// Now we can call `print()` function as `baz`'s property.
+// Now we can call `print()` function as `thing`'s property.
 
-NOTE('baz.print()')
-baz.print() // 0
+NOTE('thing.print()')
+thing.print() // 0
 
-// Now let's modify the `num` property on `baz` and invoke `print()` again, to
-// make sure that we're getting the correct result.
+// Now let's modify the `num` property on `thing` and invoke `print()` again,
+// to make sure that we're getting the correct result.
 
-baz.num = 12
-NOTE('baz.print() after setting num to 12')
-baz.print() // 12
+thing.num = 12
+NOTE('thing.print() after setting num to 12')
+thing.print() // 12
 
-// Now we know that the `print()` function has been borrowed from the `foo`
+// Now we know that the `print()` function has been borrowed from the `printer`
 // object. We'll digress here a bit to note a few things about this borrowing.
 
 // The borrowing you see is done at runtime, not compile time. For instance,
@@ -65,78 +65,78 @@ baz.print() // 12
 // will be used even if we modified it *after* the prototype chain is
 // established.
 
-foo.print = function () {
+printer.print = function () {
   console.log('num is: ' + this.num)
 }
-NOTE('baz.print() after modifying foo.print()')
-baz.print() // num is: 12
+NOTE('thing.print() after modifying printer.print()')
+thing.print() // num is: 12
 
 // As you can see, this lookup is dynamic, and the updated `print()` function
-// from `foo` is being used.
+// from `printer` is being used.
 
-// Now let's define a print function on `baz` itself, and see what happens.
+// Now let's define a print function on `thing` itself, and see what happens.
 
-baz.print = function () {
-  console.log('I am baz')
+thing.print = function () {
+  console.log('I am thing')
 }
-NOTE('After adding a print function on baz')
-baz.print() // I am baz
+NOTE('After adding a print function on thing')
+thing.print() // I am thing
 
-// Defining the `print()` function on `baz` causes that version to be used
-// instead. The lookup on `foo` is only done if `baz` does not have the
+// Defining the `print()` function on `thing` causes that version to be used
+// instead. The lookup on `printer` is only done if `thing` does not have the
 // property we are asking for. This new `print` property is called 'own
 // property' to distinguish it from inherited properties.
 
-// For now, let's revert the last change by deleting the `baz`'s own print
+// For now, let's revert the last change by deleting the `thing`'s own print
 // property.
 
-delete baz.print
-NOTE('Calling baz.print() after deleting the own property')
-baz.print() // num is: 12
+delete thing.print
+NOTE('Calling thing.print() after deleting the own property')
+thing.print() // num is: 12
 
 // We will now combine all three objects. To do this, we'll change the
 // prototype chain a little.
 
-Object.setPrototypeOf(bar, foo)
-Object.setPrototypeOf(baz, bar)
+Object.setPrototypeOf(counter, printer)
+Object.setPrototypeOf(thing, counter)
 
 // As you can no doubt guess, we are setting the prototype chain such that
-// `baz`'s prototype is `bar`, whose prototype is `foo`. In other words, the
-// chain now looks like `baz -> bar -> foo`.
+// `thing`'s prototype is `counter`, whose prototype is `printer`. In other
+// words, the chain now looks like `thing -> counter -> printer`.
 
-// We can still invoke the `print()` function as `baz`'s property as before:
+// We can still invoke the `print()` function as `thing`'s property as before:
 
-NOTE('baz.print() after changing the prototype chain to baz -> bar -> foo')
-baz.print() // num is: 12
+NOTE('thing.print() after changing the prototype chain to thing -> counter -> printer')
+thing.print() // num is: 12
 
-// In addition, we also have access to the two functions in the `bar` object.
+// In addition, we also have access to the two functions in the `counter` object.
 
-NOTE('baz.increment()')
-baz.increment()
-baz.print() // num is: 13
+NOTE('thing.increment()')
+thing.increment()
+thing.print() // num is: 13
 
-NOTE('baz.decrement()')
-baz.decrement()
-baz.print() // num is: 12
+NOTE('thing.decrement()')
+thing.decrement()
+thing.print() // num is: 12
 
-// If we log `baz` itself, though, we'll learn something interesting.
+// If we log `thing` itself, though, we'll learn something interesting.
 
-NOTE('Log baz itself')
-console.log(baz) // { num: 12 }
+NOTE('Log thing itself')
+console.log(thing) // { num: 12 }
 
 // It does not list any of the properties from the prototypes. It only lists
 // own properties. We can get a list of all properties -- own and inherited --
 // by looping over the keys:
 
-NOTE('Looping over keys on baz')
-for (let key in baz) {
-  console.log('baz has key', key)
+NOTE('Looping over keys on thing')
+for (let key in thing) {
+  console.log('thing has key', key)
 
   // The `hasOwnProperty()` function can be used to test if some key is an own
   // property of an object. Incidentally, this method comes from the
   // `Object.prototype` which all objects have as the final prototype.
 
-  if (baz.hasOwnProperty(key)) {
+  if (thing.hasOwnProperty(key)) {
     console.log(key + ' is an own property')
   } else {
     console.log(key + ' is not an own property')
@@ -145,31 +145,31 @@ for (let key in baz) {
 
 // To get all own properties as an array, we can use `Object.keys()` function.
 
-NOTE('Object.keys(baz)')
-console.log(Object.keys(baz)) // [ 'num' ]
+NOTE('Object.keys(thing)')
+console.log(Object.keys(thing)) // [ 'num' ]
 
-// Now `baz` is just one object. What if we want to create multiple versions of
-// `baz` where each has a specific value of `num`? Kinda like... erm...
+// Now `thing` is just one object. What if we want to create multiple versions
+// of `thing` where each has a specific value of `num`? Kinda like... erm...
 // classes? Armed with what we have seen thus far, it is not unimaginable that
-// we could write functions for the purpose. It's not quite the same as a
-// class in other languages, sure, but the effect is more or less the same.
+// we could write functions for the purpose. It's not quite the same as a class
+// in other languages, sure, but the effect is more or less the same.
 
-const makeBaz = function (num = 0) {
-  let baz = {num: num}
-  Object.setPrototypeOf(baz, bar)
-  return baz
+const makeStuff = function (num = 0) {
+  let thing = {num: num}
+  Object.setPrototypeOf(thing, counter)
+  return thing
 }
 
-let baz1 = makeBaz(5)
-let baz2 = makeBaz(3)
-let baz3 = makeBaz(100)
+let thing1 = makeStuff(5)
+let thing2 = makeStuff(3)
+let thing3 = makeStuff(100)
 
-NOTE('baz1.print()')
-baz1.print() // 5
-NOTE('baz2.print()')
-baz2.print() // 3
-NOTE('baz3.print()')
-baz3.print() // 100
+NOTE('thing1.print()')
+thing1.print() // 5
+NOTE('thing2.print()')
+thing2.print() // 3
+NOTE('thing3.print()')
+thing3.print() // 100
 
 // The use of `setPrototypeOf()` function to create prototype chains is used
 // very rarely in real life, if at all. The reason for this is not very clear,
@@ -189,30 +189,30 @@ baz3.print() // 100
 // specification and is now supported in virtually all JavaScript engines.
 
 // Let's replicate the above three objects using `Object.create()`. We'll leave
-// `foo` alone, as it is the last member of the chain and we don't need to do
+// `printer` alone, as it is the last member of the chain and we don't need to do
 // anything special.
 
-bar = Object.create(foo)
+counter = Object.create(printer)
 
-// This code creates an empty `bar` object which has its prototype set to
-// `foo`. Since it's an empty object, we need to add the two own properties.
+// This code creates an empty `counter` object which has its prototype set to
+// `printer`. Since it's an empty object, we need to add the two own properties.
 // In EcmaScript 2015 (a.k.a. EcmaScript 6), we can use `Object.assign()` to
 // create all own properties using an object. This approach is not possible in
 // earlier versions of JavaScript, where you have to add properties one by one.
 // We'll see both approaches, starting with the old approach first.
 
-bar.increment = function () {
+counter.increment = function () {
   this.num += 1
 }
 
-bar.decrement = function () {
+counter.decrement = function () {
   this.num -= 1
 }
 
 // The new way to achieve the above (and the above is still a valid approach)
 // would be:
 
-Object.assign(bar, {
+Object.assign(counter, {
   increment() {
     this.num += 1
   },
@@ -221,63 +221,63 @@ Object.assign(bar, {
   }
 })
 
-// Now `bar` is equipped with the same own properties as the original `bar`.
-// Finally we create `baz` which inherits the properties on `bar`. For this
-// we will write a new version of the `makeBaz` function using
-// `Object.create()` and `Object.assign()`.
+// Now `counter` is equipped with the same own properties as the original
+// `counter`. Finally we create `thing` which inherits the properties on
+// `counter`. For this we will write a new version of the `makething` function
+// using `Object.create()` and `Object.assign()`.
 
-const createBaz = function (num = 0) {
-  let baz = Object.create(bar)
-  Object.assign(baz, {
+const createThing = function (num = 0) {
+  let thing = Object.create(counter)
+  Object.assign(thing, {
     num: num
   })
-  return baz
+  return thing
 }
-baz = createBaz(0)
+thing = createThing(0)
 
 // We can now use the prototype chain to do what we could do with the original
 // three objects.
 
-NOTE('baz.increment() twice')
-baz.increment() // baz.num === 1
-baz.increment() // baz.num === 2
-NOTE('baz.decrement() once')
-baz.decrement() // baz.num === 1
-NOTE('baz.print()')
-baz.print() // num is: 1
+NOTE('thing.increment() twice')
+thing.increment() // thing.num === 1
+thing.increment() // thing.num === 2
+NOTE('thing.decrement() once')
+thing.decrement() // thing.num === 1
+NOTE('thing.print()')
+thing.print() // num is: 1
 
 // We will not go into too much detail on constructor functions and classes,
 // since there is plenty of material on those already. It should be noted,
 // though, that prototypal inheritance is at the heart of both ways of object
 // creation in JavaScript and you should not forget that. In this guide, I will
 // just show some examples of how to replicate the prototype chain using the
-// two methods mentioned. For brevity, I will leave `foo` and `bar` alone, and
-// demonstrate just the `baz` part.
+// two methods mentioned. For brevity, I will leave `printer` and `counter`
+// alone, and demonstrate just the `thing` part.
 
-function Baz(num = 0) {
+function Thing(num = 0) {
   this.num = num
 }
-Baz.prototype = bar
+Thing.prototype = counter
 
-baz = new Baz(0)
+thing = new Thing(0)
 
-NOTE('baz.increment()')
-baz.increment() // baz.num === 2
-NOTE('baz.print()')
-baz.print() // num is: 2
+NOTE('thing.increment()')
+thing.increment() // thing.num === 2
+NOTE('thing.print()')
+thing.print() // num is: 2
 
 // A few notes about the constructor function. The constructor function is a
 // normal function just like any other. There is no hidden magic in it. It
 // capitalized as a convention as a cue that it's a constructor. The trick is
-// in the `new` keyword. When a function is invoked with the `new` keyword,
-// a new blank object is created. The object's prototype is set to the
-// constructor's `prototype` property (in our case, it's `Baz.prototype` which
-// we point to `bar`), and the function is invoked with `this` set to the newly
-// created object. Anything we do to `this` in the constructor is done to the
-// new object (in our example, assigning the `num` property).
+// in the `new` keyword. When a function is invoked with the `new` keyword, a
+// new blank object is created. The object's prototype is set to the
+// constructor's `prototype` property (in our case, it's `Thing.prototype`
+// which we point to `counter`), and the function is invoked with `this` set to
+// the newly created object. Anything we do to `this` in the constructor is
+// done to the new object (in our example, assigning the `num` property).
 
-// NOTE: see the `not-new.js` module for an implementation of the
-// `new` keyword as a JavaScript function.
+// NOTE: see the `not-new.js` module for an implementation of the `new` keyword
+// as a JavaScript function.
 
 // As mentioned before, EcmaScript 6 introduced a new `class` keyword to help
 // out developers that feel more comfortable thinking in terms of classes. The
@@ -285,52 +285,54 @@ baz.print() // num is: 2
 // inheritance, though, and if you fancy using it, you should be aware of this
 // fact.
 
-// Again, doing `baz` as the example, we will implement an ES6 class. This
-// time, though, we cannot do direct inheritance from the `bar` object as ES6
-// classes can only inherit other classes or constructors.
+// Again, doing `thing` as the example, we will implement an ES6 class. This
+// time, though, we cannot do direct inheritance from the `counter` object as
+// ES6 classes can only inherit other classes or constructors.
 
-// For the purposes of this example, let's just imagine we have a `Bar` class
-// that implements `bar`.
+// For the purposes of this example, let's just imagine we have a `counter` class
+// that implements `counter`.
 
-class Bar /* extends Foo */ {
+class Counter /* extends printer */ {
   constructor() { /* ... */ }
 }
 
-class Baz1 extends Bar {  // Note that we use 'Baz1' because we cannot have
-  constructor(num = 0) {  // multiple constructors/classes of the same name
+// We use 'Thing1' below because we cannot have
+// multiple classes and constructors of the same name
+class Thing1 extends Counter {
+  constructor(num = 0) {
     super() // <-- must call this when using inheritance
     this.num = num
   }
 }
 
-// You will notice the `super()` call in the `Baz1`'s constructor. This is a
-// shortcut for invoking the `Bar`'s constructor and it is *required* if you
-// need to manipulate `this` in the constructor. This is good example of why
-// I think the classes in ES6 introduce completely unnecessary levels of
+// You will notice the `super()` call in the `Thing1`'s constructor. This is a
+// shortcut for invoking the `Counter`'s constructor and it is *required* if
+// you need to manipulate `this` in the constructor. This is good example of
+// why I think the classes in ES6 introduce completely unnecessary levels of
 // complexity, and why I personally don't find them so useful.
 
-// If we don't want to have a `Bar` class, and we want to stick to using `bar`
-// object we can still do that.
+// If we don't want to have a `counter` class, and we want to stick to using
+// `counter` object we can still do that.
 
-class Baz2 {
+class Thing2 {
   constructor(num = 0) {
     this.num = num
   }
 }
 
-Baz2.prototype = bar
+Thing2.prototype = counter
 
 // In this case, we don't need to invoke `super()` as there is no superclass.
-// We can also clearly see that `Baz2` also has the `prototype` property which
-// works the same way as the same property on constructors.
+// We can also clearly see that classes also have the `prototype` property
+// which works the same way as the `prototype` property on constructors.
 
 // Instantiating the class is exactly the same as with constructors (the whole
 // `class` business is actually just another way to write constructors).
 
-NOTE('Create baz using Baz class')
-baz = new Baz2(8)
-baz.increment() // baz.num === 9
-baz.print() // 9
+NOTE('Create thing using a class')
+thing = new Thing2(8)
+thing.increment() // thing.num === 9
+thing.print() // 9
 
 // With this, we conclude the module on prototypal inheritance. Remember that
 // there is no one correct way to do these things in JavaScript, and with ES5
