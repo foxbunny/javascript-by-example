@@ -262,9 +262,9 @@ Thing.prototype = counter
 thing = new Thing(0)
 
 NOTE('thing.increment()')
-thing.increment() // thing.num === 2
+thing.increment() // thing.num === 1
 NOTE('thing.print()')
-thing.print() // num is: 2
+thing.print() // num is: 1
 
 // A few notes about the constructor function. The constructor function is a
 // normal function just like any other. There is no hidden magic in it. It
