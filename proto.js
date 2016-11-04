@@ -5,16 +5,16 @@ import {NOTE} from './_util'
 // =============================================
 
 // With the influx of developers from various backgrounds, the JavaScript scene
-// has been 'enriched' by plenty of confusion around how to do object
-// orientation. The gist of it is that JavaScript OOP is not class-based, and
-// grasping this idea is probably the key to clearing this confusion up and
-// becoming a better JavaScript programmer.
+// has been 'enriched' with plenty of confusion around object orientation. The
+// gist of it is that JavaScript OOP is not class-based, and grasping this idea
+// is probably the key to clearing this confusion up and becoming a better
+// JavaScript programmer.
 
-// The goal of this module is to demonstrate how prototypal inheritance works
-// using working examples, and hopefully shorten the time it takes to master
-// it for the novice JavaScript programmers.
+// The goal of this module is to demonstrate how prototypal inheritance works,
+// and hopefully shorten the time it takes to master it for the novice
+// JavaScript programmers.
 
-// Let's say we have two objects, `foo` and `bar`.
+// To get started, let's say we have two objects, `foo` and `bar`.
 
 let foo = {
   print() {
@@ -332,7 +332,7 @@ baz = new Baz2(8)
 baz.increment() // baz.num === 9
 baz.print() // 9
 
-// With this, we conclue the module on prototypal inheritance. Rememeber that
+// With this, we conclude the module on prototypal inheritance. Rememeber that
 // there is no one correct way to do these things in JavaScript, and with ES5
 // and ES6 we now have more options than ever. On the other hand, prototypal
 // model is at the heart of it all in JavaScript, and that is the single truth
