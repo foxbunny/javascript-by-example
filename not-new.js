@@ -10,7 +10,7 @@ import {NOTE} from './_util'
 // situations. It's purpose is to reveal the guts of the `new` keyword so you
 // can understand what it does.
 
-// For more information on prototypal inhertiance in JavaScript (which covers
+// For more information on prototypal inheritance in JavaScript (which covers
 // the usage of constructor functions), take a look at the `proto.js` module.
 
 // We will start by defining a constructor function.
@@ -19,7 +19,7 @@ function Foo(name) {
   this.name = name
 }
 
-// We also want the objcts to inherit some properties, which we will set using
+// We also want the objects to inherit some properties, which we will set using
 // the constructor's `prototype` property.
 
 Foo.prototype.exclaim = function () {
@@ -55,13 +55,13 @@ console.log('bar.name === ', bar.name) // bar.name === Batman
 NOTE('bar.exclaim()')
 bar.exclaim() // Batman!
 
-// Hopefully, the `new` keyword has been demistified and you have a better
+// Hopefully, the `new` keyword has been demystified and you have a better
 // understanding of what exactly it does.
 
 // NOTE: In the example function, the fist and second step can be merged into
 // a single `Object.create()` call. This has not been done in order to break
 // down the operations that the `new` keyword performs. A slightly shorter
-// version of the `neo()` function may look lke this:
+// version of the `neo()` function may look like this:
 
 const neo2 = function (ctor, ...ctorArgs) {
   let obj = Object.create(ctor.prototype)
