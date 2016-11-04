@@ -11,8 +11,8 @@ import {NOTE} from './_util'
 // JavaScript programmer.
 
 // The goal of this module is to demonstrate how prototypal inheritance works,
-// and hopefully shorten the time it takes to master it for the novice
-// JavaScript programmers.
+// and hopefully shorten the time it takes for novice JavaScript programmers
+// to master it .
 
 // To get started, let's say we have two objects, `foo` and `bar`.
 
@@ -40,7 +40,7 @@ let baz = {
   num: 0
 }
 
-// Let set `baz`'s prototype to `foo` so that we can use the `print()`
+// Let's set `baz`'s prototype to `foo` so that we can use the `print()`
 // function.
 
 Object.setPrototypeOf(baz, foo)
@@ -57,7 +57,7 @@ baz.num = 12
 NOTE('baz.print() after setting num to 12')
 baz.print() // 12
 
-// Now we know that te `print()` function has been borrowed from the `foo`
+// Now we know that the `print()` function has been borrowed from the `foo`
 // object. We'll digress here a bit to note a few things about this borrowing.
 
 // The borrowing you see is done at runtime, not compile time. For instance,
@@ -173,7 +173,7 @@ baz3.print() // 100
 
 // The use of `setPrototypeOf()` function to create prototype chains is used
 // very rarely in real life, if at all. The reason for this is not very clear,
-// but as with all things JavaScript, there is no official best practices so
+// but as with all things JavaScript, there are no official best practices. So
 // if you feel this way of establishing a prototype chain works for you, there
 // is no reason to avoid it. You will find many opinions on different ways to
 // do prototypal (and quasi-class-based inheritance) in JavaScript on the Web,
