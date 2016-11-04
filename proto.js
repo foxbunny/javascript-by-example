@@ -1,7 +1,7 @@
 import {NOTE} from './_util'
 
 // =============================================
-// What is prototypal inhertiance in JavaScript?
+// What is prototypal inheritance in JavaScript?
 // =============================================
 
 // With the influx of developers from various backgrounds, the JavaScript scene
@@ -100,7 +100,7 @@ baz.print() // num is: 12
 Object.setPrototypeOf(bar, foo)
 Object.setPrototypeOf(baz, bar)
 
-// As you can no doubt guess, we are setting the prototype chanin such that
+// As you can no doubt guess, we are setting the prototype chain such that
 // `baz`'s prototype is `bar`, whose prototype is `foo`. In other words, the
 // chain now looks like `baz -> bar -> foo`.
 
@@ -171,7 +171,7 @@ baz2.print() // 3
 NOTE('baz3.print()')
 baz3.print() // 100
 
-// The use of `setPrototypeOf()` function to create prorotype chains is used
+// The use of `setPrototypeOf()` function to create prototype chains is used
 // very rarely in real life, if at all. The reason for this is not very clear,
 // but as with all things JavaScript, there is no official best practices so
 // if you feel this way of establishing a prototype chain works for you, there
@@ -179,7 +179,7 @@ baz3.print() // 100
 // do prototypal (and quasi-class-based inheritance) in JavaScript on the Web,
 // but keep in mind that as long as you are solving the problem at hand, there
 // is no need to subscribe to any of the opinions. Having said that, we'll take
-// a look at a few more ways to establish the inhertiance chain.
+// a look at a few more ways to establish the inheritance chain.
 
 // Another way to establish prototypal inheritance is to use `Object.create()`.
 // This method is discussed in much more depth by Douglas Crockford in his
@@ -222,7 +222,7 @@ Object.assign(bar, {
 })
 
 // Now `bar` is equipped with the same own properties as the original `bar`.
-// Finally we create `baz` which inherites the properties on `bar`. For this
+// Finally we create `baz` which inherits the properties on `bar`. For this
 // we will write a new version of the `makeBaz` function using
 // `Object.create()` and `Object.assign()`.
 
@@ -249,7 +249,7 @@ baz.print() // num is: 1
 // We will not go into too much detail on constructor functions and classes,
 // since there is plenty of material on those already. It should be noted,
 // though, that prototypal inheritance is at the heart of both ways of object
-// creation in JavaSript and you should not forget that. In this guide, I will
+// creation in JavaScript and you should not forget that. In this guide, I will
 // just show some examples of how to replicate the prototype chain using the
 // two methods mentioned. For brevity, I will leave `foo` and `bar` alone, and
 // demonstrate just the `baz` part.
@@ -282,15 +282,15 @@ baz.print() // num is: 2
 // As mentioned before, EcmaScript 6 introduced a new `class` keyword to help
 // out developers that feel more comfortable thinking in terms of classes. The
 // keyword does not really change the fact that we are doing prototypal
-// inhertiance, though, and if you fancy using it, you should be aware of this
+// inheritance, though, and if you fancy using it, you should be aware of this
 // fact.
 
 // Again, doing `baz` as the example, we will implement an ES6 class. This
 // time, though, we cannot do direct inheritance from the `bar` object as ES6
 // classes can only inherit other classes or constructors.
 
-// For the pruposes of this example, let's just imagine we have a `Bar` class
-// that implmenets `bar`.
+// For the purposes of this example, let's just imagine we have a `Bar` class
+// that implements `bar`.
 
 class Bar /* extends Foo */ {
   constructor() { /* ... */ }
@@ -304,13 +304,13 @@ class Baz1 extends Bar {  // Note that we use 'Baz1' because we cannot have
 }
 
 // You will notice the `super()` call in the `Baz1`'s constructor. This is a
-// shortcut for invokiing the `Bar`'s constructor and it is *required* if you
+// shortcut for invoking the `Bar`'s constructor and it is *required* if you
 // need to manipulate `this` in the constructor. This is good example of why
 // I think the classes in ES6 introduce completely unnecessary levels of
 // complexity, and why I personally don't find them so useful.
 
 // If we don't want to have a `Bar` class, and we want to stick to using `bar`
-// object we can stil do that.
+// object we can still do that.
 
 class Baz2 {
   constructor(num = 0) {
@@ -332,7 +332,7 @@ baz = new Baz2(8)
 baz.increment() // baz.num === 9
 baz.print() // 9
 
-// With this, we conclude the module on prototypal inheritance. Rememeber that
+// With this, we conclude the module on prototypal inheritance. Remember that
 // there is no one correct way to do these things in JavaScript, and with ES5
 // and ES6 we now have more options than ever. On the other hand, prototypal
 // model is at the heart of it all in JavaScript, and that is the single truth
