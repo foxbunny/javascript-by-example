@@ -334,6 +334,17 @@ thing = new Thing2(8)
 thing.increment() // thing.num === 9
 thing.print() // 9
 
+// Very unfortunately, all of the built-in types in JavaScript are implemented
+// as or have matching constructor functions. For instance, `Date`, `Array`,
+// `String` and similar, are all constructors. This is the reason you will
+// frequently see references to `Array.prototype.slice()` and similar
+// functions, which are properties on the objects created by the mentioned
+// constructors. `Array.prototype.slice()` is the same as `[].slice()`, and
+// the former notation is simply used as a convention (possibly because
+// `[].slice()` looks a bit weird in documentation).
+
+// TRIVIA: `Math` is named like a constructor, but it is not.
+
 // With this, we conclude the module on prototypal inheritance. Remember that
 // there is no one correct way to do these things in JavaScript, and with ES5
 // and ES6 we now have more options than ever. On the other hand, prototypal
