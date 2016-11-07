@@ -172,14 +172,16 @@ NOTE('thing3.print()')
 thing3.print() // 100
 
 // The use of `setPrototypeOf()` function to create prototype chains is used
-// very rarely in real life, if at all. The reason for this is not very clear,
-// but as with all things JavaScript, there are no official best practices. So
-// if you feel this way of establishing a prototype chain works for you, there
-// is no reason to avoid it. You will find many opinions on different ways to
-// do prototypal (and quasi-class-based inheritance) in JavaScript on the Web,
-// but keep in mind that as long as you are solving the problem at hand, there
-// is no need to subscribe to any of the opinions. Having said that, we'll take
-// a look at a few more ways to establish the inheritance chain.
+// very rarely in real life, if at all. The main reason for this is that it
+// changes the prototype of an already instantiated object, which can be slow
+// when the object you've created is *already* referenced in many places in
+// your code *when you call `setPrototypeOf()` on it*. You should definitely
+// *not* use it in such a scenario (fixing inheritance after the fact).
+
+// Although I do not have any solid proof (yet), I believe that the way it is
+// used in this module is safe from this side effect, but if you feel I could
+// be wrong, here's an industry-standard way of creating objects and
+// establishing setting their prototype in one go.
 
 // Another way to establish prototypal inheritance is to use `Object.create()`.
 // This method is discussed in much more depth by Douglas Crockford in his
@@ -220,6 +222,14 @@ Object.assign(counter, {
     this.num -= 1
   }
 })
+
+// Although I say 'new way', it does not do exactly the same thing as
+// assigning properties. The way we use `Object.assign()` here, a new object
+// literal is first created, and then its own properties are copied to the
+// `counter` object after that. This is probably fast enough in most
+// situations, but it stands to reason that it would be slower than assigning
+// properties one by one. In most cases, I imagine it will not be an issue.
+// Profiling is your friend, though.
 
 // Now `counter` is equipped with the same own properties as the original
 // `counter`. Finally we create `thing` which inherits the properties on
