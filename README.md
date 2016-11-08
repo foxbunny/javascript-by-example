@@ -14,6 +14,8 @@ line of code.
 
 ## Table of contents
 
+- [func]('./func.js') - The ins and outs of functions in JavaScript
+- [this]('./this.js') - In-depth discussion of the `this` object
 - [proto](./proto.js) - Prototypal inheritance and examples of object creation
 and inheritance using several different patterns
 - [not-new](./not-new.js) - An implementation of `new` keyword as a JavaScript
