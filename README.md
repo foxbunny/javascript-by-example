@@ -21,6 +21,8 @@ and inheritance using several different patterns
 - [not-new](./not-new.js) - An implementation of `new` keyword as a JavaScript
 function to demonstrate how instantiating objects using constructors and
 classes actually works
+- [type-detection](./type-detection.js) - In-depth tour of various type
+detection techniques in JavaScript
 
 Have a topic you would like to see covered? Use the [issue tracker](
 https://github.com/foxbunny/javascript-by-example/issues) to submit feature
