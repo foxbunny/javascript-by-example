@@ -5,17 +5,24 @@ import {NOTE} from './_util'
 // =======================
 
 // Declarative programming is a way of dealing with complexity in your programs.
-// It achieves this goal by formulating the end product of computation rather
+// It achieves this goal by formulating the end products of computations rather
 // than specifying steps necessary to arrive at the result.
 
 // In this module, we will see how declarative style can be achieved in
 // JavaScript, and how this can simplify our programs. We will do so without
 // going into too much theory, though, so you can focus on the result, and not
-// the tools. However, we do need tools. We will, therefore, introduce tools
-// as wel go.
+// the tools. We do need some tools for this to work, though, and we will,
+// introduce tools as we go. As you will see, we don't need YASL (yet another
+// scary library) to get the job done.
 
-// Let's first start with a very simple example. Say we have an array of numbers
-// and we want to sum them up, and calculate an average. The numbers are these:
+// We will also take a look at two common paradigms so that you can understand
+// the problem we are solving a bit better and get oriented by first looking at
+// some familiar code. I am hoping that showing those examples first, you will
+// be able to notice some issues with them, and, more importantly, how
+// declarative style deals with the issues.
+
+// Let's start with a very simple example. We have an array of numbers and we
+// want to sum them up, and also calculate their average. The numbers are:
 
 const scores = [4, 2.2, 2, 3, 5.6, 4, 3.8, 4.2]
 
@@ -46,6 +53,9 @@ console.log('average is', paverage) // 3.5999...
 // common in many programming languages. Just imagine those are 28.8 and 3.6. ;)
 // This is not important for our discussion.
 
+// This is called the procedural style: you write the code as a procedure that
+// takes you from the start to the final goal.
+
 // As you get a bit more advanced, you may say "Oh, look, Array has a forEach()
 // function which is a much nicer way to loop over it. And I don't need the
 // count variable because the array has a length property which gives me the
@@ -64,7 +74,7 @@ console.log('average is', laverage) // 3.5999...
 
 // After you learn a bit of Java, you may do this instead:
 
-class SumAvg {
+class Stats {
   constructor(scores) {
     this.count = scores.length
     this.scores = scores
@@ -83,16 +93,23 @@ class SumAvg {
   }
 }
 
-const savg = new SumAvg(scores)
+const savg = new Stats(scores)
 NOTE('OOP, results:')
 console.log('sum is', savg.sum) // 28.79999...
 console.log('average is', savg.average) // 3.5999...
 
-// That is just beathtakingly fancy! Look at all the code! Alas, it still does
-// not change the fundamental approach. If you look at it carefully, you'll
-// see that it has just shifted the code around a bit.
+// In the object-oriented style, we enclose (technically it's 'encapsulate') the
+// values and associated calculations in an object. We could say that the object
+// represents some kind of stats with sum and average properties. We could have also created two objects for
+// each of these calculations, but our goal here is not to talk about
+// object-oriented programming and its best practices, so Java programmers will
+// excuse my silly OOP example.
 
-// NOTE: Yes, the author is just using a bunch of strawmen to demonstrate the
+// That is just beathtakingly fancy! Classes FTW! Alas, it still does not change
+// the fundamental approach. If you look at it carefully, you'll see that it has
+// just shifted the code around a bit.
+
+// NOTE: Yes, I am just using these examples as strawmen to demonstrate the
 // downsides of using procedural and OOP paradigms *for this particular problem*
 // and is fully aware that there are valid cases for those paradigms for some
 // other problems (which he hopes not to encounter ever in his life).
@@ -100,45 +117,45 @@ console.log('average is', savg.average) // 3.5999...
 // And now for something completely different. It's going to seem a bit long and
 // tedious, but bear with me. I'm just being extra-verbose about the though
 // process for demonstration purposes. In the end, it's just a few lines of
-// code, but just showing that code doesn't mean much.
+// code, but code without explanation doesn't mean much.
 
-// To give you some context we will attempt to *describe* all the calculations
-// before we ever touch the actual number, instead of plowing through the
-// numbers one by one and doing all the intermediate steps. You an think of it
-// as carefully setting up the dominos (our calculations) before we hit the
-// first one with our finger (the input).
+// To give you some context about what we are going to do, I'll tell you that
+// our main goal is to *describe* all the calculations before we ever touch the
+// numbers, as opposed to plowing through the numbers one by one and doing all
+// the intermediate steps. You can think of it as carefully setting up the
+// dominos (our calculations) before we hit the first one with our finger (the
+// input).
+
+// Let's get started.
 
 // If you think about summing, it is simply a series of additions. And we know
 // what addition looks like:
 
 const add = (x, y) => x + y
 
-// Summing also reduces a bunch of numbers to a single number using addition.
-// We now know all we need to describe sums. Now we need to describe that in our
-// program.
-
-// What we want to say is, we take some thing (that possible contains numbers),
-// that can be reduced somehow, and we reduce it using addition. Arrays happen
-// to be a reducible container, and that works fine for us.
-
-// Let's map out the reduction first as it's a generic operation.
+// Summing also reduces a bunch of numbers to a single number. What we need is a
+// way to define the operation of reducing a thing (like a container), using
+// some operation (like, say, addition in our case). Let's define how this
+// reduction could work in our code:
 
 const reduce = operation => reducible => reducible.reduce(operation)
 
-// We've written this in somewhat weird way, but you'll see why in a bit. This
+// We've written this in a somewhat weird way, but you'll see why in a bit. This
 // is called currying. Instead of taking all of the operational parameters at
-// once we feed the `reduce()` functions its paramters one by one. Each time
-// we feed one parameter, we produce a function that is hard-coded to the
-// parameters that were already passed. Now we can write our sum as a reduce
-// that is hard-coded to addition.
+// once we feed the `reduce()` function its paramters one by one. Each time we
+// feed one parameter, we produce a function that is hard-coded to the
+// parameters that were already passed.
+
+// Now we can express the sum as a reduction using addition.
 
 const sum = reduce(add)
 
 // What `sum()` has become is this: `reducible => reducible.reduce(add)`, a
 // function that takes a reducible container, and reduces it using addition.
-// With currying and two simple genric functions, we are able to build a
+// With currying and two simple genric functions, we are able to define a
 // slightly more complex concept. In fact, this way of breaking things down
-// is fractal, and it goes all the way up to fairly complex systems.
+// is fractal, and it goes all the way up to fairly complex systems, while still
+// using the same way of thinking about things.
 
 // We won't do systems in this module, but let's take a bit more complex
 // problem which is the average.
@@ -148,7 +165,7 @@ const sum = reduce(add)
 // solution in the real life. However, we will do something a bit more
 // complicated here as an exercise.
 
-// For average we need the sum (which we already) know how to derive, and we
+// For the average we need the sum which we already know how to derive, and we
 // also need the count. The count is the length of an array, so:
 
 const count = (x) => x.length
@@ -167,20 +184,29 @@ const naiveAvg = (reducible) => div(sum(reducible), count(reducible))
 // and it definitely looks like we can get rid of it. Remember, our goal is to
 // describe the calculation itself, not how to perform it.
 
-// We have three things in this calculation. We have the count and the sum. They
-// are both coming from the same reducible, but they represent different
-// calculations. We can think of it as some kind of branching. The division,
-// on the other hand, reduces two things into one value, so just like add, it
-// would make sense that it could operate on a reducible. If we could somehow
-// transform the original reducible into another reducible that has sum and
-// count as its members, we might be able to simplify the problem.
+// Let's break it down and analyze what's going on.
+
+// We have three things in this calculation. We have the count, the sum, and the
+// division. Count and sum are both calculated from the same reducible, but they
+// represent different calculations. We can think of it as some kind of
+// branching. The division, on the other hand, reduces two things into one
+// value, so just like add, it would make sense that it could operate on a
+// reducible. If we could somehow transform the original reducible into another
+// reducible that has sum and count as its members, we might be able to simplify
+// the problem. Graphically, it would look something like this:
+
+//                     --> [sum] ----
+//                   /                \
+//    [reducible] --                    ---> [division]
+//                   \                /
+//                     --> [count] --
 
 // We will first define the transformation for sum and count.
 
-const expand = (...ops) => reducible => ops.map(op => op(reducible))
+const expand = (...ops) => x => ops.map(op => op(x))
 
 // The `expand()` function takes a number of operations, and returns a function
-// that takes a reducible. The returned function will pass the reducible to each
+// that takes a single value. The returned function will pass the value to each
 // of the operations and return an array of results. Since arrays are reducible,
 // we can call div on it. But we can't use our `div()` function as is, as it
 // does not work on reducibles yet, so we will need to define a new one.
@@ -211,7 +237,10 @@ const average = compose(division, expand(sum, count))
 // new: compose(divide, expand(sum, count))
 
 // Now the `average()` function only describes the calculation, and does not
-// deal with data at all anymore!
+// deal with data at all anymore! Keep in mind that both versions are doing
+// *exactly the same thing*, but they are constructed in a different way to
+// break down the problem into smaller parts, so we can really deeply think
+// about how it all works.
 
 // Since the code was fragmented with narrative a lot, let's collect it here
 // in one comment block so we can see what we have ended up with.
@@ -223,7 +252,7 @@ const reduce = operation => reducible => reducible.reduce(operation)
 const combine = (f, g) => (...args) => f(g(...args))
 const compose = (...fns) => reduce(combine)(fns)
 
-// Basic operations
+// Generic calculations
 const div = (x, y) => x / y
 const add = (x, y) => x + y
 const count = (x) => x.length
@@ -242,21 +271,21 @@ console.log('sum is', sum(scores))
 console.log('average is', average(scores))
 
 // I have mentioned this time and again, but the whole adventure we went through
-// had only one goal: drive the data out of our functions. The data, in this
-// case, is the `scores` array that we call 'reducible'.
+// had only one goal: drive the data out of our functions and focus on the
+// behavior (calculations). The data, in this case, is the `scores` array that
+// we call 'reducible'.
 
-// You will notice that we did not actually get ride of reducible completely.
-// There is one place that deals with them, and that's the `reduce()` function.
-// Importantly, it's the one and only one place where we ever talk about it, and
-// we talk about it in  a very generic way: 'how to work with reducibles in
-// general'. As you can see from our code, we were able to apply this concept in
-// multiple places.
+// We did not actually get rid of reducibles completely. There is one place that
+// deals with them, and that's the `reduce()` function. Crucially, it's the one
+// and only one place where we ever talk about it, and we talk about it in a
+// very generic way: 'how to work with reducibles in general'. As you can see
+// from our code, we were able to apply this concept in multiple places.
 
 // Now I mentioned something about a pattern earlier. When you have an operation
 // that is performed on two values of the same type (e.g., number, string,
 // function, etc) and produces a single value of the same type, you can always
-// use such operations (functions) to reduce arrays. We had three examples of
-// this:
+// use such operations (functions) to reduce reducibles such as arrays. We had
+// three examples of this:
 
 // - sum reduces a reducible to a number using addition that takes two numbers
 //   and returns a single number
@@ -265,11 +294,11 @@ console.log('average is', average(scores))
 // - compose reduces a reducible to a single function using an operation that
 //   takes two functions and returns a single function
 
-// We keep mentioning reducibles. Arrays are reducible (they have a `reduce()`
-// function that can be used to reduce the entire array to a single value), but
-// there is no reason why you can define your own objects that implement the
-// `reduce()` function and can be reduced to a single value in a way that makes
-// sense to them.
+// Arrays in JavaScript are reducible, and they have a `reduce()` function that
+// can be used to reduce the entire array to a single value. There is no reason
+// why you can define your own objects that implement the `reduce()` function,
+// though, and can be reduced to a single value in a way that makes sense to
+// them.
 
 // There is a similar pattern called 'functors', which are objects that have a
 // `map()` function and that for each member they contain return the same number
@@ -279,21 +308,24 @@ console.log('average is', average(scores))
 // guessed, an array in JavaScript is also a functor. As with reducibles, you
 // can define your own functors and use them in a variety of ways.
 
-// Yet another take-away is that, although we have produce a bit more lines of
-// code than the procedural counterpart, we have also been able to clearly
-// delineate generic and concrete operations (functions). For example, functions
-// like `reduce()`, `compose()`, and `add()`, are clearly generally useful in
-// many programs we may write (in fact, there are many libraries that already
-// provide them, and we could have simply used one of them instead of writing
-// our own). If we factor all our generic functions out, we are left with only
-// three lines of code that are directly related to the problem we are solving.
+// Although we have not seen it in this example, map and reduce are often used
+// in a tandem, to translate the data into an easily reducible form, and then
+// summarize it in some way.
+
+// Another take-away is that, although we have produce a bit more lines of code
+// than the procedural counterpart, we have also been able to clearly delineate
+// generic and concrete operations (functions). For example, functions like
+// `reduce()`, `compose()`, and `add()`, are clearly generally useful in most
+// programs we may write (in fact, there are many libraries that already provide
+// them, and we could have simply used one of them instead of writing our own).
+// If we factor all our generic functions out, we are left with only three lines
+// of code that are directly related to the problem we are solving.
 
 // Finally, looking at our code, you will probably agree that each of the
 // functions are very very short and relatively easy to reason about provided
 // you know what the underlying code is doing. There are, of course, drawbacks
-// too. For example, if you *don't* know what `reduce()` or `compose()` does,
-// you may not understand what `reduce(div)` and some of the other derived
-// functions may do. At least until you get used to this style of programming,
-// you should know that it's not an either-or choice, and you can always use
-// and of the other styles where clarity (at least for you) appears to be
-// compromised.
+// too. For example, if you *don't* know what `reduce()` or `compose()` do, you
+// may not understand what `reduce(div)` and some of the other derived functions
+// may do. At least until you get used to this style of programming, you should
+// know that it's not an either-or choice, and you can always use and of the
+// other styles where clarity (at least for you) appears to be compromised.
