@@ -17,12 +17,14 @@ line of code.
 - [func]('./func.js') - The ins and outs of functions in JavaScript
 - [this]('./this.js') - In-depth discussion of the `this` object
 - [proto](./proto.js) - Prototypal inheritance and examples of object creation
-and inheritance using several different patterns
+  and inheritance using several different patterns
 - [not-new](./not-new.js) - An implementation of `new` keyword as a JavaScript
-function to demonstrate how instantiating objects using constructors and
-classes actually works
+  function to demonstrate how instantiating objects using constructors and
+  classes actually works
 - [type-detection](./type-detection.js) - In-depth tour of various type
-detection techniques in JavaScript
+  detection techniques in JavaScript
+- [declarative](./declarative.js) - Declarative (functional) programming in
+  JavaScript with side-by-side comparison with procedural and OOP styles.
 
 Have a topic you would like to see covered? Use the [issue tracker](
 https://github.com/foxbunny/javascript-by-example/issues) to submit feature
