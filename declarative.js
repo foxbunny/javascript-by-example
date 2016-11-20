@@ -321,6 +321,15 @@ console.log('average is', average(scores))
 // If we factor all our generic functions out, we are left with only three lines
 // of code that are directly related to the problem we are solving.
 
+// In this module, we have touched on the topic of 'kinds of things' that we
+// pass to our functions, as well as the 'kind of functions' (e.g., function
+// that takes two numbers and returns one number). In fact, we do that a lot in
+// this programming style. These 'kinds' are formally known as types, and we can
+// see that declarative programming and types kind of fit together nicely.
+// JavaScript is not a statically typed language, and the burden of reasoning
+// types falls squarely on the programmer. There are ways to introduce static
+// typing into JavaScript, though, and we will look at them in future modules.
+
 // Finally, looking at our code, you will probably agree that each of the
 // functions are very very short and relatively easy to reason about provided
 // you know what the underlying code is doing. There are, of course, drawbacks
