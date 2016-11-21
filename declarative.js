@@ -133,26 +133,30 @@ console.log('average is', savg.average) // 3.5999...
 
 const add = (x, y) => x + y
 
-// Summing also reduces a bunch of numbers to a single number. What we need is a
-// way to define the operation of reducing a thing (like a container), using
+// Summing also reduces a bunch of numbers to a single number. What we need is
+// a way to define the operation of reducing a thing (like a container), using
 // some operation (like, say, addition in our case). Let's define how this
 // reduction could work in our code:
 
-const reduce = operation => reducible => reducible.reduce(operation)
+const reduce = operation => foldable => foldable.reduce(operation)
 
-// We've written this in a somewhat weird way, but you'll see why in a bit. This
-// is called currying. Instead of taking all of the operational parameters at
-// once we feed the `reduce()` function its paramters one by one. Each time we
-// feed one parameter, we produce a function that is hard-coded to the
+// As you can see from the parameter names, objects that have a `reduce()`
+// function are called 'foldable', because multiple values 'fold down' to a
+// single value.
+
+// We've written this in a somewhat weird way, but you'll see why in a bit.
+// This is called currying. Instead of taking all of the operational parameters
+// at once we feed the `reduce()` function its parameters one by one. Each time
+// we feed one parameter, we produce a function that is hard-coded to the
 // parameters that were already passed.
 
 // Now we can express the sum as a reduction using addition.
 
 const sum = reduce(add)
 
-// What `sum()` has become is this: `reducible => reducible.reduce(add)`, a
-// function that takes a reducible container, and reduces it using addition.
-// With currying and two simple genric functions, we are able to define a
+// What `sum()` has become is this: `foldable => foldable.reduce(add)`, a
+// function that takes a foldable container, and folds it using addition.
+// With currying and two simple generic functions, we are able to define a
 // slightly more complex concept. In fact, this way of breaking things down
 // is fractal, and it goes all the way up to fairly complex systems, while still
 // using the same way of thinking about things.
@@ -170,7 +174,7 @@ const sum = reduce(add)
 
 const count = (x) => x.length
 
-// To calculate the average of a reducible, we need to divide its sum with
+// To calculate the average of a foldable, we need to divide its sum with
 // the count of its elements. We need to describe division as well, so here it
 // goes:
 
@@ -178,26 +182,26 @@ const div = (x, y) => x / y
 
 // Now we're ready to state what average is:
 
-const naiveAvg = (reducible) => div(sum(reducible), count(reducible))
+const naiveAvg = (foldable) => div(sum(foldable), count(foldable))
 
-// We have the average now, but it's somehow wrong. Reducible is repeated twice,
-// and it definitely looks like we can get rid of it. Remember, our goal is to
-// describe the calculation itself, not how to perform it.
+// We have the average now, but it's somehow wrong. `foldable` is repeated
+// twice, and it definitely looks like we can get rid of it. Remember, our goal
+// is to describe the calculation itself, not how to perform it.
 
 // Let's break it down and analyze what's going on.
 
 // We have three things in this calculation. We have the count, the sum, and the
-// division. Count and sum are both calculated from the same reducible, but they
+// division. Count and sum are both calculated from the same foldable, but they
 // represent different calculations. We can think of it as some kind of
 // branching. The division, on the other hand, reduces two things into one
 // value, so just like add, it would make sense that it could operate on a
-// reducible. If we could somehow transform the original reducible into another
-// reducible that has sum and count as its members, we might be able to simplify
+// foldable. If we could somehow transform the original foldable into another
+// foldable that has sum and count as its members, we might be able to simplify
 // the problem. Graphically, it would look something like this:
 
 //                     --> [sum] ----
 //                   /                \
-//    [reducible] --                    ---> [division]
+//    [foldable] --                     ---> [division]
 //                   \                /
 //                     --> [count] --
 
@@ -207,9 +211,9 @@ const expand = (...ops) => x => ops.map(op => op(x))
 
 // The `expand()` function takes a number of operations, and returns a function
 // that takes a single value. The returned function will pass the value to each
-// of the operations and return an array of results. Since arrays are reducible,
+// of the operations and return an array of results. Since arrays are foldable,
 // we can call div on it. But we can't use our `div()` function as is, as it
-// does not work on reducibles yet, so we will need to define a new one.
+// does not work on foldables yet, so we will need to define a new one.
 
 const division = reduce(div)
 
@@ -230,10 +234,10 @@ const compose = (...fns) => reduce(combine)(fns)
 
 const average = compose(division, expand(sum, count))
 
-// And just like that, we drove the reducible out of our original function. Here
+// And just like that, we drove `foldable` out of our original function. Here
 // are the two versions side by side:
 
-// old: (reducible) => div(sum(reducible), count(reducible))
+// old: (foldable) => div(sum(foldable), count(foldable))
 // new: compose(divide, expand(sum, count))
 
 // Now the `average()` function only describes the calculation, and does not
@@ -248,9 +252,10 @@ const average = compose(division, expand(sum, count))
 /*
 
 // Reusable utitilies
-const reduce = operation => reducible => reducible.reduce(operation)
+const reduce = operation => foldable => foldable.reduce(operation)
 const combine = (f, g) => (...args) => f(g(...args))
 const compose = (...fns) => reduce(combine)(fns)
+const expand = (...ops) => x => ops.map(op => op(x))
 
 // Generic calculations
 const div = (x, y) => x / y
@@ -273,28 +278,28 @@ console.log('average is', average(scores))
 // I have mentioned this time and again, but the whole adventure we went through
 // had only one goal: drive the data out of our functions and focus on the
 // behavior (calculations). The data, in this case, is the `scores` array that
-// we call 'reducible'.
+// we call 'foldable'.
 
-// We did not actually get rid of reducibles completely. There is one place that
+// We did not actually get rid of foldables completely. There is one place that
 // deals with them, and that's the `reduce()` function. Crucially, it's the one
 // and only one place where we ever talk about it, and we talk about it in a
-// very generic way: 'how to work with reducibles in general'. As you can see
+// very generic way: 'how to work with foldables in general'. As you can see
 // from our code, we were able to apply this concept in multiple places.
 
 // Now I mentioned something about a pattern earlier. When you have an operation
 // that is performed on two values of the same type (e.g., number, string,
 // function, etc) and produces a single value of the same type, you can always
-// use such operations (functions) to reduce reducibles such as arrays. We had
+// use such operations (functions) to reduce foldables such as arrays. We had
 // three examples of this:
 
-// - sum reduces a reducible to a number using addition that takes two numbers
+// - sum reduces a foldable to a number using addition that takes two numbers
 //   and returns a single number
-// - division reduces a reducible to a number using an operation that takes two
+// - division reduces a foldable to a number using an operation that takes two
 //   numbers and returns a single number
-// - compose reduces a reducible to a single function using an operation that
+// - compose reduces a foldable to a single function using an operation that
 //   takes two functions and returns a single function
 
-// Arrays in JavaScript are reducible, and they have a `reduce()` function that
+// Arrays in JavaScript are foldables, and they have a `reduce()` function that
 // can be used to reduce the entire array to a single value. There is no reason
 // why you can define your own objects that implement the `reduce()` function,
 // though, and can be reduced to a single value in a way that makes sense to
@@ -305,7 +310,7 @@ console.log('average is', average(scores))
 // of members that are transformed using a supplied operation. We used this
 // pattern in our `expand()` function, where we had a functor containing two
 // functions which were transformed into their return values. As you may have
-// guessed, an array in JavaScript is also a functor. As with reducibles, you
+// guessed, an array in JavaScript is also a functor. As with foldables, you
 // can define your own functors and use them in a variety of ways.
 
 // Although we have not seen it in this example, map and reduce are often used
@@ -331,7 +336,7 @@ console.log('average is', average(scores))
 // typing into JavaScript, though, and we will look at them in future modules.
 
 // Finally, looking at our code, you will probably agree that each of the
-// functions are very very short and relatively easy to reason about provided
+// functions are very, very short and relatively easy to reason about provided
 // you know what the underlying code is doing. There are, of course, drawbacks
 // too. For example, if you *don't* know what `reduce()` or `compose()` do, you
 // may not understand what `reduce(div)` and some of the other derived functions
