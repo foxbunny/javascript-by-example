@@ -1,4 +1,5 @@
 import {NOTE} from './_util'
+import daggy from 'daggy'
 
 // =============================================
 // What is prototypal inheritance in JavaScript?
@@ -377,6 +378,34 @@ thing.print() // 9
 // `[].slice()` looks a bit weird in documentation).
 
 // TRIVIA: `Math` is named like a constructor, but it is not.
+
+// If you want to create a constructor function quickly, and you don't care
+// about inheritance at all (there are valid use cases for this in declarative
+// programming), there is a very nice library called daggy. Although I don't
+// normally recommend any particular library for anything, daggy is an
+// exception because it is very small, and it doesn't try to do too many things
+// at once.
+
+// To create a constructor using daggy, you just call the `tagged()` function.
+// For example:
+
+const Thing3 = daggy.tagged('name')
+
+Thing.prototype.print = function () {
+  console.log(this.name)
+}
+
+// Then you can work with it as with a normal constructor. The library doesn't
+// just create constructors. The arguments passed to `tagged()` become the
+// constructor arguments an the object properties. The constructor also checks
+// if *all* the arguments were supplied, and allows the usage without `new`.
+// In a way, daggy's tagged constructors are constructors on steroids.
+
+try {
+  let thing3 = Thing3()
+} catch (e) {
+  console.log('Could not create Thing3 without arguments')
+}
 
 // With this, we conclude the module on prototypal inheritance. Remember that
 // there is no one correct way to do these things in JavaScript, and with ES5
