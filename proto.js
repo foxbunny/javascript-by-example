@@ -289,6 +289,29 @@ thing.print() // num is: 1
 // NOTE: see the `not-new.js` module for an implementation of the `new` keyword
 // as a JavaScript function.
 
+// A common complaint about constructor functions was the requirement to use
+// `new`. This is actually quite easy to mitigate with a little bit of code.
+
+function AnotherThing(name) {
+  if (!this) return new AnotherThing(name)
+  // Do the normal constructor things below:
+  this.name = name
+}
+
+AnotherThing.prototype.print = function () {
+  console.log('another thing:', this.name)
+}
+
+const another1 = AnotherThing('without new')
+const another2 = new AnotherThing('with new')
+
+another1.print() // another thing: without new
+another2.print() // another thing: with new
+
+// The reason it works without `new` is that when invoked without `new`, the
+// `this` is undefined (you need to use strict mode for this, though, so be
+// careful).
+
 // As mentioned before, EcmaScript 6 introduced a new `class` keyword to help
 // out developers that feel more comfortable thinking in terms of classes. The
 // keyword does not really change the fact that we are doing prototypal
