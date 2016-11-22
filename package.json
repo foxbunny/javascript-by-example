@@ -4,7 +4,7 @@
   "description": "Collection of ES6 modules that explain JS concepts",
   "main": "bind.js",
   "scripts": {
-    "start": "babel-node"
+    "start": "node ./run.js"
   },
   "author": "Hajime Yamasaki Vukelic <hayavuk@gmail.com>",
   "license": "MIT",
@@ -14,6 +14,7 @@
     "babel-runtime": "^6.18.0"
   },
   "dependencies": {
-    "daggy": "0.0.1"
+    "daggy": "0.0.1",
+    "literatejs": "0.0.2"
   }
 }
