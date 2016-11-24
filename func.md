@@ -35,8 +35,8 @@ Let's talk about syntax first.
 
 There are three ways to define functions.
 
-1. function assigned to a variable or object property (a.k.a. function
-   expression)
+- (1) function assigned to a variable or object property (a.k.a. function
+  expression)
 
 ```
 // 1a. anonymous function expression:
@@ -46,20 +46,20 @@ const foo = function (x, y, z) { /* ... */ }
 const fooNamed = function fooNamed(x, y, z) { /* ... */ }
 ```
 
-2. function that you don't assign (a.k.a. function declaration
-   statement) and cannot be anonymous
+- (2) function that you don't assign (a.k.a. function declaration statement) and
+  cannot be anonymous
 
 ```
 function bar(x, y, z) { /* ... */ }
 ```
 
-3. the new arrow function expression that you assign to a variable
+- (3) the new arrow function expression that you assign to a variable
 
 ```
 const baz = (x, y, z) => { /* ... */ }
 ```
 
-4. object property
+- (4) object property
 
 ```
 const bam = {
@@ -85,7 +85,7 @@ functions in an `if` block using function statements, even if the `if`
 condition is not met. You should, therefore, avoid using function statements in
 `if` blocks as it may lead to confusion and subtle bugs.
 
-The arrow function form is a new syntax introduced in EcmaScript 6, and the one
+The arrow function form is a new syntax introduced in ECMAScript 6, and the one
 I prefer to use. There are subtle differences between arrow- and non-arrow
 functions in both syntax and semantics, though, and they can't be used
 interchangeably in all situations. We'll talk about the differences later,

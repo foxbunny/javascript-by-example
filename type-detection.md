@@ -21,7 +21,7 @@ Primitive values are:
 - null
 - undefined
 - string
-- symbol (since EcmaScript 6)
+- symbol (since ECMAScript 6)
 
 The primitive types can generally be obtained using the `typeof` function,
 which returns the name of the primitive value's type.
@@ -271,7 +271,7 @@ our `what()` function for this if you want, but it's much better to use it if
 you have multiple types you need to test for. In this particular case, using
 `Array.isArray()` makes more sense.
 
-Prior to EcmaScript 6, setting default argument values was also done using
+Prior to ECMAScript 6, setting default argument values was also done using
 type detection. For instance:
 
 ```
@@ -281,7 +281,7 @@ let increment = x => {
 }
 ```
 
-**NOTE:** The above example is actuallly a very good case where you cannot
+**NOTE:** The above example is actually a very good case where you cannot
 avoid type detection because you *can* add 1 to undefined, in which case you
 would get  a `NaN` as a result, and your code will not throw an exception. It
 makes sense mathematically in a way, but hardly useful in real life.
