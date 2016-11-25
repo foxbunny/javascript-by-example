@@ -219,7 +219,7 @@ Another way to establish prototypal inheritance is to use `Object.create()`.
 This method is discussed in much more depth by Douglas Crockford in his famous
 article entitled Prototypal inheritance (see
 http://javascript.crockford.com/prototypal.html). Since he wrote the article,
-the example code has made it into the official EcmaScript 5 specification and
+the example code has made it into the official ECMAScript 5 specification and
 is now supported in virtually all JavaScript engines.
 
 Let's replicate the above three objects using `Object.create()`. We'll leave
@@ -232,7 +232,7 @@ counter = Object.create(printer)
 
 This code creates an empty `counter` object which has its prototype set to
 `printer`. Since it's an empty object, we need to add the two own properties.
-In EcmaScript 2015 (a.k.a. EcmaScript 6), we can use `Object.assign()` to
+In ECMAScript 2015 (a.k.a. ECMAScript 6), we can use `Object.assign()` to
 create all own properties using an object. This approach is not possible in
 earlier versions of JavaScript, where you have to add properties one by one.
 We'll see both approaches, starting with the old approach first.

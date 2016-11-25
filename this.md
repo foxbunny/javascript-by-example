@@ -65,7 +65,7 @@ If it is invoked as a constructor, then the newly created object is accessible
 as `this` within the function body. In all other cases, the function is not
 going to have a this (it will be `undefined`).
 
-The last sentence is only true in EcmaScript 5 using strict mode, and later
+The last sentence is only true in ECMAScript 5 using strict mode, and later
 versions of JavaScript. The diagram below illustrates this:
 
     ES3 ---- ES5 --+-- ES5 strict ---- ES6 ---->
