@@ -12,8 +12,8 @@ it. When someone says 'this is the problem', you don't know whether they are
 referring to the `this` object or trying to point something else out.
 Unfortunately, it is too late to fix this, and `this` is here to stay. :)
 
-Before you start reading this module, you should peruse the `func.js` module
-and make sure you have a firm understanding of what functions are in
+Before you start reading this module, you should peruse the [func](./func.md)
+module and make sure you have a firm understanding of what functions are in
 JavaScript, and how they work. If you really feel like you'd like to read this
 module first, at least remember this: in JavaScript, you (can) assign function
 expressions to object properties but that is no different from assigning values
@@ -57,7 +57,7 @@ new myFunc
 
 Cases 2 and 3 are more or less the same, only using different syntax (which has
 its uses). We won't talk much about the 4th case, which is discussed separately
-in the `proto.js` module.
+in the [proto](./proto.md) module.
 
 When a non-arrow function is invoked as an object's method or applied to an
 object (cases 2 and  3), then the object in question is accessible as `this`.

@@ -241,8 +241,8 @@ short-hand notation and assigning a function expression.
 Merely defining as, and assigning to, object properties does not make functions
 special. They are still the same functions. You will find more details about
 how functions are effectively used as object properties (methods) in the
-`this.js` module, but try to read this module to the end before going there.
-For now, let's continue with the examples:
+[this](./this.md) module, but try to read this module to the end before going
+there. For now, let's continue with the examples:
 
 ```
 const property = () => console.log("I'm a property")
@@ -466,7 +466,7 @@ different because it is compiled into a non-arrow function expression.
 
 There are several more properties like `call()`, `apply()`, or `bind()`, but we
 will only talk about `bind()` in this module. `call()` and `apply()` are
-discussed in the `this.js` module.
+discussed in the [this](./this.md) module.
 
 All functions have a `bind()` function. This function is normally used to bind
 non-arrow functions' `this` to some value, but it can also be used to perform
@@ -513,10 +513,10 @@ into weird code like `[].slice.call(arguments)` you should know that this is
 because `arguments` is only array-like.
 
 The `this` object is convoluted enough to deserve a module of its own. Please
-refer to `this.js` module for more information.
+refer to [this](./this.md) module for more information.
 
 Furthermore, non-arrow functions can be used as object constructors, a topic
-that is covered in more detail in the `proto.js` module.
+that is covered in more detail in the [proto](./proto) module.
 
 As mentioned before, arrow functions *do not have `arguments` and `this` (and
 also some other things that are not that important). Some programmers may tell

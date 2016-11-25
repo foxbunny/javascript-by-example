@@ -131,7 +131,7 @@ console.log('({n: 12}).toString():', ({n: 12}).toString()) // [object Object]
 This function, when applied to objects other than the plain objects, gives us
 information about their type. Since this function is a property on the objects
 themselves, we can access it as `Object.prototype.toString()` (see the
-`proto.js` module for more information on how this works).
+[proto](./proto.md) module for more information on how this works).
 
 ```
 const toString = Object.prototype.toString

@@ -8,6 +8,10 @@ Declarative programming is a way of dealing with complexity in your programs.
 It achieves this goal by formulating the end products of computations rather
 than specifying steps necessary to arrive at the result.
 
+Before you get started with this module, you should be very comfortable with
+functions in JavaScript. If you think you're all set, great! Otherwise, you
+will find a refresher in the [func](./func.md) module.
+
 In this module, we will see how declarative style can be achieved in
 JavaScript, and how this can simplify our programs. We will do so without going
 into too much theory, though, so you can focus on the result, and not the

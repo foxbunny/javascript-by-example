@@ -11,7 +11,7 @@ situations. It's purpose is to reveal the guts of the `new` keyword so you can
 understand what it does.
 
 For more information on prototypal inheritance in JavaScript (which covers the
-usage of constructor functions), take a look at the `proto.js` module.
+usage of constructor functions), take a look at the [proto](./proto.md) module.
 
 We will start by defining a constructor function.
 

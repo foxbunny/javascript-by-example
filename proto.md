@@ -333,8 +333,8 @@ blank object is created. The object's prototype is set to the constructor's
 object. Anything we do to `this` in the constructor is done to the new object
 (in our example, assigning the `num` property).
 
-**NOTE:** see the `not-new.js` module for an implementation of the `new`
-keyword as a JavaScript function.
+**NOTE:** see the [not-new](./not-new.md) module for an implementation of the
+`new` keyword as a JavaScript function.
 
 A common complaint about constructor functions was the requirement to use
 `new`. This is actually quite easy to mitigate with a little bit of code.
@@ -361,7 +361,7 @@ The reason it works without `new` is that when invoked without `new`, the
 `this` is undefined (you need to use strict mode for this, though, so be
 careful).
 
-As mentioned before, EcmaScript 6 introduced a new `class` keyword to help out
+As mentioned before, ECMAScript 6 introduced a new `class` keyword to help out
 developers that feel more comfortable thinking in terms of classes. The keyword
 does not really change the fact that we are doing prototypal inheritance,
 though, and if you fancy using it, you should be aware of this fact.
