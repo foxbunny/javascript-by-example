@@ -50,6 +50,13 @@ example, if you wish to run `proto.js`, you would run this command:
 
     npm start proto
 
+## Literate modules
+
+The markdown modules are literate JavaScript modules. They are made executable
+with the use of [literatejs](https://github.com/foxbunny/literatejs) program.
+There is some boilerplate code in the [run.js](./run.js) script if you are
+curious.
+
 ## License
 
 This code in this repository is licensed under the MIT license.
