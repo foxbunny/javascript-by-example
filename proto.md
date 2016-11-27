@@ -1,4 +1,4 @@
-```
+```javascript
 import {NOTE} from './_util'
 import daggy from 'daggy'
 ```
@@ -17,7 +17,7 @@ it .
 
 To get started, let's say we have two objects:
 
-```
+```javascript
 let printer = {
   print() {
     console.log(this.num)
@@ -39,7 +39,7 @@ both objects in a new object? The answer is prototypes. Let's create yet
 another object. This time the object will only have the `num` property to which
 the other two objects were referring to.
 
-```
+```javascript
 let thing = {
   num: 0
 }
@@ -48,13 +48,13 @@ let thing = {
 Let's set `thing`'s prototype to `printer` so that we can use the `print()`
 function.
 
-```
+```javascript
 Object.setPrototypeOf(thing, printer)
 ```
 
 Now we can call `print()` function as `thing`'s property.
 
-```
+```javascript
 NOTE('thing.print()')
 thing.print() // 0
 ```
@@ -62,7 +62,7 @@ thing.print() // 0
 Now let's modify the `num` property on `thing` and invoke `print()` again, to
 make sure that we're getting the correct result.
 
-```
+```javascript
 thing.num = 12
 NOTE('thing.print() after setting num to 12')
 thing.print() // 12
@@ -75,7 +75,7 @@ The borrowing you see is done at runtime, not compile time. For instance, if we
 were to modify the original `print()` function, the modified version will be
 used even if we modified it *after* the prototype chain is established.
 
-```
+```javascript
 printer.print = function () {
   console.log('num is: ' + this.num)
 }
@@ -89,7 +89,7 @@ As you can see, this lookup is dynamic, and the updated `print()` function from
 
 Now let's define a print function on `thing` itself, and see what happens.
 
-```
+```javascript
 thing.print = function () {
   console.log('I am thing')
 }
@@ -106,7 +106,7 @@ to distinguish it from inherited properties.
 For now, let's revert the last change by deleting the `thing`'s own print
 property.
 
-```
+```javascript
 delete thing.print
 
 NOTE('Calling thing.print() after deleting the own property')
@@ -116,7 +116,7 @@ thing.print() // num is: 12
 We will now combine all three objects. To do this, we'll change the prototype
 chain a little.
 
-```
+```javascript
 Object.setPrototypeOf(counter, printer)
 Object.setPrototypeOf(thing, counter)
 ```
@@ -127,14 +127,14 @@ the chain now looks like `thing -> counter -> printer`.
 
 We can still invoke the `print()` function as `thing`'s property as before:
 
-```
+```javascript
 NOTE('thing.print() after changing the prototype chain to thing -> counter -> printer')
 thing.print() // num is: 12
 ```
 
 In addition, we also have access to the two functions in the `counter` object.
 
-```
+```javascript
 NOTE('thing.increment()')
 thing.increment()
 thing.print() // num is: 13
@@ -146,7 +146,7 @@ thing.print() // num is: 12
 
 If we log `thing` itself, though, we'll learn something interesting.
 
-```
+```javascript
 NOTE('Log thing itself')
 console.log(thing) // { num: 12 }
 ```
@@ -155,7 +155,7 @@ It does not list any of the properties from the prototypes. It only lists own
 properties. We can get a list of all properties -- own and inherited -- by
 looping over the keys:
 
-```
+```javascript
 NOTE('Looping over keys on thing')
 for (let key in thing) {
   console.log('thing has key', key)
@@ -174,7 +174,7 @@ for (let key in thing) {
 
 To get all own properties as an array, we can use `Object.keys()` function.
 
-```
+```javascript
 NOTE('Object.keys(thing)')
 console.log(Object.keys(thing)) // [ 'num' ]
 ```
@@ -185,7 +185,7 @@ Armed with what we have seen thus far, it is not unimaginable that we could
 write functions for the purpose. It's not quite the same as a class in other
 languages, sure, but the effect is more or less the same.
 
-```
+```javascript
 const makeStuff = function (num = 0) {
   let thing = {num: num}
   Object.setPrototypeOf(thing, counter)
@@ -226,7 +226,7 @@ Let's replicate the above three objects using `Object.create()`. We'll leave
 `printer` alone, as it is the last member of the chain and we don't need to do
 anything special.
 
-```
+```javascript
 counter = Object.create(printer)
 ```
 
@@ -237,7 +237,7 @@ create all own properties using an object. This approach is not possible in
 earlier versions of JavaScript, where you have to add properties one by one.
 We'll see both approaches, starting with the old approach first.
 
-```
+```javascript
 counter.increment = function () {
   this.num += 1
 }
@@ -250,7 +250,7 @@ counter.decrement = function () {
 The new way to achieve the above (and the above is still a valid approach)
 would be:
 
-```
+```javascript
 Object.assign(counter, {
   increment() {
     this.num += 1
@@ -273,7 +273,7 @@ Now `counter` is equipped with the same own properties as the original
 `counter`. For this we will write a new version of the `makething` function
 using `Object.create()` and `Object.assign()`.
 
-```
+```javascript
 const createThing = function (num = 0) {
   let thing = Object.create(counter)
   Object.assign(thing, {
@@ -288,7 +288,7 @@ thing = createThing(0)
 We can now use the prototype chain to do what we could do with the original
 three objects.
 
-```
+```javascript
 NOTE('thing.increment() twice')
 thing.increment() // thing.num === 1
 thing.increment() // thing.num === 2
@@ -308,7 +308,7 @@ examples of how to replicate the prototype chain using the two methods
 mentioned. For brevity, I will leave `printer` and `counter` alone, and
 demonstrate just the `thing` part.
 
-```
+```javascript
 function Thing(num = 0) {
   this.num = num
 }
@@ -339,7 +339,7 @@ object. Anything we do to `this` in the constructor is done to the new object
 A common complaint about constructor functions was the requirement to use
 `new`. This is actually quite easy to mitigate with a little bit of code.
 
-```
+```javascript
 function AnotherThing(name) {
   if (!this) return new AnotherThing(name)
   // Do the normal constructor things below:
@@ -373,7 +373,7 @@ classes can only inherit other classes or constructors.
 For the purposes of this example, let's just imagine we have a `counter` class
 that implements `counter`.
 
-```
+```javascript
 class Counter /* extends printer */ {
   constructor() { /* ... */ }
 }
@@ -398,7 +398,7 @@ and why I personally don't find them so useful.
 If we don't want to have a `counter` class, and we want to stick to using
 `counter` object we can still do that.
 
-```
+```javascript
 class Thing2 {
   constructor(num = 0) {
     this.num = num
@@ -415,7 +415,7 @@ works the same way as the `prototype` property on constructors.
 Instantiating the class is exactly the same as with constructors (the whole
 `class` business is actually just another way to write constructors).
 
-```
+```javascript
 NOTE('Create thing using a class')
 thing = new Thing2(8)
 thing.increment() // thing.num === 9
@@ -441,7 +441,7 @@ because it is very small, and it doesn't try to do too many things at once.
 To create a constructor using daggy, you just call the `tagged()` function. For
 example:
 
-```
+```javascript
 const Thing3 = daggy.tagged('name')
 
 Thing.prototype.print = function () {
@@ -455,7 +455,7 @@ constructor arguments an the object properties. The constructor also checks if
 *all* the arguments were supplied, and allows the usage without `new`. In a
 way, daggy's tagged constructors are constructors on steroids.
 
-```
+```javascript
 try {
   let thing3 = Thing3()
 } catch (e) {

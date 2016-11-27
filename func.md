@@ -1,4 +1,4 @@
-```
+```javascript
 import {NOTE} from './_util'
 ```
 
@@ -38,7 +38,7 @@ There are three ways to define functions.
 - (1) function assigned to a variable or object property (a.k.a. function
   expression)
 
-```
+```javascript
 // 1a. anonymous function expression:
 const foo = function (x, y, z) { /* ... */ }
 
@@ -49,19 +49,19 @@ const fooNamed = function fooNamed(x, y, z) { /* ... */ }
 - (2) function that you don't assign (a.k.a. function declaration statement) and
   cannot be anonymous
 
-```
+```javascript
 function bar(x, y, z) { /* ... */ }
 ```
 
 - (3) the new arrow function expression that you assign to a variable
 
-```
+```javascript
 const baz = (x, y, z) => { /* ... */ }
 ```
 
 - (4) object property
 
-```
+```javascript
 const bam = {
   property(x, y, z) { /* ... */ }
 }
@@ -72,7 +72,7 @@ difference is that the named functions can be defined anywhere in the scope,
 and they are treated as if they were defined at the very top of the scope
 (the module they are defined in, or a function in which they are defined):
 
-```
+```javascript
 whereDoYouComeFrom() // look at the bottom!
 ```
 
@@ -114,21 +114,21 @@ parameters and/or the complexity of the function body.
 
 When there is only one parameter, the parenthesis can be omitted.
 
-```
+```javascript
 const noParens = x => { /* .... */ }
 ```
 
 When the function body is a single expression, then the braces can be
 omitted.
 
-```
+```javascript
 const noBraces = x => x + 1
 ```
 
 In the above form, if you wish to return an object, it must be wrapped in
 parenthesis.
 
-```
+```javascript
 const noBracesObject = x => ({foo: x})
 ```
 
@@ -136,7 +136,7 @@ You don't *have* to omit neither braces nor parenthesis if you don't want to,
 though. Keep in mind that, if you don't omit braces, you must use a `return`
 statement to return values.
 
-```
+```javascript
 const fullPackage = (x) => { return x + 1 }
 ```
 
@@ -144,7 +144,7 @@ Except for single-expression arrow functions, you generally have to use the
 `return` statement to return a value. If you don't, `undefined` is returned
 instead.
 
-```
+```javascript
 const returning = function (x) {
   return x + 1
 }
@@ -153,7 +153,7 @@ const returning = function (x) {
 Starting with ES6, function arguments can be destructured using parameters with
 pattern-matching. We'll go over a few examples of how this destructuring works:
 
-```
+```javascript
 const takesArray = ([x, y, z]) => {
   console.log('took array:', x, y, z)
 }
@@ -183,7 +183,7 @@ remapsKeys({x: 'x', y: 'y'}) // remapped: x y
 
 As of ES6, default values of parameters can also be specified.
 
-```
+```javascript
 const havingDefault = (x = 12) => {
   console.log(x)
 }
@@ -200,7 +200,7 @@ there is no way to define required parameters nor are exceptions thrown when
 arguments are missing. Any parameters for which no arguments are passed will be
 `undefined`.
 
-```
+```javascript
 const noArg = (x) => {
   console.log(x)
 }
@@ -217,7 +217,7 @@ language feature. Resistance is undefined!
 The extra arguments passed to a function can be trapped using splats, which
 appeared in ES6 for the first time. These are also known as 'rest parameters'.
 
-```
+```javascript
 const withSplat = (x, ...rest) => {
   console.log(x, rest)
 }
@@ -228,7 +228,7 @@ withSplat(1, 2, 3) // 1 [ 2, 3 ]
 
 Splats are an empty array if there are no extra arguments.
 
-```
+```javascript
 NOTE('Invoking withSplat(1)')
 withSplat(1) // 1 [ ]
 ```
@@ -244,7 +244,7 @@ how functions are effectively used as object properties (methods) in the
 [this](./this.md) module, but try to read this module to the end before going
 there. For now, let's continue with the examples:
 
-```
+```javascript
 const property = () => console.log("I'm a property")
 const proprietor = {
   prop: property
@@ -264,7 +264,7 @@ Functions that receive other functions as arguments or return functions (or
 both) are called higher-order functions. Higher-order functions allow for great
 composability.
 
-```
+```javascript
 const is = x => y => x === y
 const isTwo = is(2)
 const not = fn => x => ! fn(x)
@@ -297,7 +297,7 @@ have seen this with `is()` and `not()` already, where the returned function
 retain access to the outer function's arguments. Let's do one more example
 where the inner function uses a variable defined in the outer function.
 
-```
+```javascript
 const makeRequester = () => {
   // This could be generated dynamically for example:
   const token = {
@@ -324,7 +324,7 @@ parenthesis right after the ones around the function. This works with both the
 function expression that uses the `function` keyword, and with arrow function
 expressions. Here's an example:
 
-```
+```javascript
 ;(() => {
   console.log("I'm invoked immediately!")
 })()
@@ -339,7 +339,7 @@ preceding statements.
 
 IIFE's return value can be assigned to a variable.
 
-```
+```javascript
 const requester2 = ((username) => {
   // This could be generated dynamically, for example
   const token = {
@@ -364,7 +364,7 @@ private state that should not be accessible to the outside code.
 Let me remind you again that JavaScript functions are objects. This is quite
 evident when you start noticing that you can define properties on them.
 
-```
+```javascript
 const funcWithProps = () => { /* ... */ }
 funcWithProps.someProp = 'foo'
 ```
@@ -373,7 +373,7 @@ Although user-defined properties on functions are not all that useful,
 functions also have a few built-in properties that are. You can use the
 `length` property to figure out the number of parameters it expects.
 
-```
+```javascript
 const howMany = (a, b, c) => { /* ... */ }
 console.log('howMany.length === ' + howMany.length) // 3
 ```
@@ -382,7 +382,7 @@ We could, for example, use the `length` property to implement a function that,
 given a function, accumulates arguments until there are enough (or more) of
 them to satisfy the original function's parameter list.
 
-```
+```javascript
 const accumulate = (fn, accumulated = []) => {
   // Immediately return a function
   return (...args) => {
@@ -425,7 +425,7 @@ the user has invoked the inner function.
 
 A function's `name` property will tell us what the function is named.
 
-```
+```javascript
 console.log('howMany.name === ' + howMany.name) // howMany
 ```
 
@@ -433,7 +433,7 @@ While it may sound silly, it can be useful in some cases. For example, if you
 are writing code that sets up routing, you can encode the route name in the
 function name.
 
-```
+```javascript
 const router = (function () {
   const routes = {}
   return {
@@ -454,7 +454,7 @@ router.show() // { '/home/': [Function: home] }
 You can also call the `toString()` property to get the source representation
 of a function.
 
-```
+```javascript
 console.log(howMany.toString()) // (a, b, c) => {/* ... */}
 ```
 
@@ -472,7 +472,7 @@ All functions have a `bind()` function. This function is normally used to bind
 non-arrow functions' `this` to some value, but it can also be used to perform
 partial application of functions. For instance:
 
-```
+```javascript
 const onlyNeedsThree = (a, b, c) => {
   console.log(a, b, c)
 }
@@ -488,7 +488,7 @@ an non-arrow function. With arrow functions, we don't really care, so we leave
 it as `undefined`. Since this may look a little confusing, we could write our
 own function to partially apply.
 
-```
+```javascript
 const partial = (fn, ...args) => fn.bind(undefined, ...args)
 
 const onlyNeedsTwo = partial(onlyNeedsThree, 'a')
@@ -537,7 +537,7 @@ definitely *know* both, though.
 Hopefully this gives you enough material to continue exploring programming with
 functions in more detail.
 
-```
+```javascript
 // This function is intentionally hanging down here
 function whereDoYouComeFrom() {
   console.log('Look at the bottom!')

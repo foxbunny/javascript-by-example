@@ -1,4 +1,4 @@
-```
+```javascript
 import {NOTE} from './_util'
 ```
 
@@ -15,7 +15,7 @@ usage of constructor functions), take a look at the [proto](./proto.md) module.
 
 We will start by defining a constructor function.
 
-```
+```javascript
 function Foo(name) {
   this.name = name
 }
@@ -24,7 +24,7 @@ function Foo(name) {
 We also want the objects to inherit some properties, which we will set using
 the constructor's `prototype` property.
 
-```
+```javascript
 Foo.prototype.exclaim = function () {
   console.log(this.name + '!')
 }
@@ -32,7 +32,7 @@ Foo.prototype.exclaim = function () {
 
 Normally, we would use this constructor like so:
 
-```
+```javascript
 NOTE('Create foo using Foo constructor')
 let foo = new Foo('Superman')
 console.log('foo.name ===', foo.name) // foo.name === Superman
@@ -43,7 +43,7 @@ foo.exclaim() // Superman!
 
 A function that replaces the `new` keyword may look something like this:
 
-```
+```javascript
 const neo = function (ctor, ...ctorArgs) {
   // Create the new object
   let obj = {}
@@ -58,7 +58,7 @@ const neo = function (ctor, ...ctorArgs) {
 
 Let's see if the function actually does what we want.
 
-```
+```javascript
 NOTE('Create bar using Foo constructor and neo() function')
 let bar = neo(Foo, 'Batman')
 console.log('bar.name === ', bar.name) // bar.name === Batman
@@ -75,7 +75,7 @@ a single `Object.create()` call. This has not been done in order to break down
 the operations that the `new` keyword performs. A slightly shorter version of
 the `neo()` function may look like this:
 
-```
+```javascript
 const neo2 = function (ctor, ...ctorArgs) {
   let obj = Object.create(ctor.prototype)
   ctor.apply(obj, ctorArgs)

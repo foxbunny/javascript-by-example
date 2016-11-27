@@ -1,4 +1,4 @@
-```
+```javascript
 import {NOTE} from './_util'
 ```
 
@@ -24,34 +24,34 @@ Functions in JavaScript can be invoked either directly or using dot notation,
 as a method on an object, and a few other ways. Here's a list of the various
 ways a function can be invoked.
 
-```
+```javascript
 const myFunc = () => {}
 const myObj = {
   myMeth: myFunc
 }
 ```
 
-1. We can invoke a function normally (directly)
+- (1) We can invoke a function normally (directly)
 
-```
+```javascript
 myFunc()
 ```
 
-2. We can invoke it as an object method
+- (2) We can invoke it as an object method
 
-```
+```javascript
 myObj.myMeth()
 ```
 
-3. We can apply it to an object using `call()` or `apply()` functions
+- (3) We can apply it to an object using `call()` or `apply()` functions
 
-```
+```javascript
 myFunc.apply(myObj)
 ```
 
-4. Invoked using `new` keyword as an object constructor
+- (4) Invoked using `new` keyword as an object constructor
 
-```
+```javascript
 new myFunc
 ```
 
@@ -89,7 +89,7 @@ yourself a great favor by remembering that.
 Let's first look at a typical usage of `this` (one that's going to be the most
 useful to you).
 
-```
+```javascript
 const bear = {
   name: 'Teddy',
   own: function (what) {
@@ -105,7 +105,7 @@ When the `bear.own()` function is invoked as a method, using dot notation, the
 value of `this` is the `bear` object. The same function can be assigned to a
 variable and invoked stand-alone.
 
-```
+```javascript
 let own = bear.own
 try {
   own('honey pot') // in <ES5 w/o strict mode, logs 'undefined owns honey pot'
@@ -117,7 +117,7 @@ try {
 The `bear.own` can also be passed to another function as an argument and
 invoked within it.
 
-```
+```javascript
 const callWithPot = (fn) => {
   fn('honey pot')
 }
@@ -152,7 +152,7 @@ reason.
 
 The context can be affixed using the `bind()` function. For instance:
 
-```
+```javascript
 own = bear.own.bind(bear)
 NOTE('Calling bound own()')
 own('bound honey pot') // Teddy owns bound honey pot
@@ -171,7 +171,7 @@ the arguments.
 
 Let's define another object to work with.
 
-```
+```javascript
 const deer = {
   name: 'Bambi'
 }
@@ -180,7 +180,7 @@ const deer = {
 The `deer` object we've defined does not have the `own` function, but we can
 borrow one from the `bear`.
 
-```
+```javascript
 NOTE("Borrowing bear's own() function")
 bear.own.call(deer, 'flower pot') // Bambi owns flower pot
 ```
@@ -191,7 +191,7 @@ The `call()` call invokes `bear.own()` and binds `this` to the first argument
 If for some reason we don't know how many arguments we will have at runtime, we
 can use `apply()`, which takes the arguments as an array.
 
-```
+```javascript
 NOTE('Borrowing own() using apply()')
 bear.own.apply(deer, ['flower pot']) // Bambi owns flower pot
 ```
@@ -202,7 +202,7 @@ We have already mentioned that the `this` binding is dynamic. It just so
 happens that you can use this to your advantage quite easily. We will show this
 by splicing the `bear`'s `own()` function into the `deer` object.
 
-```
+```javascript
 deer.own = bear.own
 NOTE("Using deer's own() function")
 deer.own('flower pot') // Bambi owns flower pot
@@ -219,7 +219,7 @@ functions. This is also true when a function is defined within another one. A
 common scenario is trying to access the outer function's `this`. A solution to
 this issue is to assign `this` to a variable in the outer scope.
 
-```
+```javascript
 const alligator = {
   name: 'Al',
   bites: 12,

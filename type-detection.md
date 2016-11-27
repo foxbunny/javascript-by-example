@@ -1,4 +1,4 @@
-```
+```javascript
 import {NOTE} from './_util'
 ```
 
@@ -26,7 +26,7 @@ Primitive values are:
 The primitive types can generally be obtained using the `typeof` function,
 which returns the name of the primitive value's type.
 
-```
+```javascript
 console.log('type of true:', typeof(true)) // boolean
 console.log('type of 1:', typeof(1)) // number
 console.log('type of null:', typeof(null)) // object
@@ -41,7 +41,7 @@ generally a big omission in the JavaScript specification, and `null` is the
 only primitive value whose type you cannot test with `typeof`. Luckily, `null`
 is the only value of `null` type, so you can simply test for equality:
 
-```
+```javascript
 let nothing = null;
 console.log('null === null:', nothing === null) // true
 ```
@@ -49,7 +49,7 @@ console.log('null === null:', nothing === null) // true
 There is no difference between floating point numbers and integers. They are
 both `number` type.
 
-```
+```javascript
 console.log('type of 1.344:', typeof(1.344)) // number
 ```
 
@@ -59,14 +59,14 @@ difference.
 Functions are the only non-primitive type that you can detect using `typeof()`
 and it returns "function" as expected.
 
-```
+```javascript
 console.log('type of function:', typeof(() => {}))
 ```
 
 When it comes to built-in non-primitive types such as `Arrays`, `typeof()`
 always returns `object`.
 
-```
+```javascript
 console.log('type of [1, 2, 3]:', typeof([1, 2, 3])) // object
 console.log('type of {a: 12}:', typeof({a: 12})) // object
 console.log('type of new Date():', typeof(new Date())) // object
@@ -76,13 +76,13 @@ console.log('type of /regexp/:', typeof(/regexp/)) // object
 There are a few ways to check the type of these objects. One of the common
 methods is to use the `instanceof` operator.
 
-```
+```javascript
 console.log('/regexp/ is instance of RegExp:', /regexp/ instanceof RegExp)
 ```
 
 This also works with custom constructors that you may create.
 
-```
+```javascript
 class MyCtor { }
 let my = new MyCtor
 console.log('my is instance of MyClass:', my instanceof MyCtor) // true
@@ -92,7 +92,7 @@ It does not work, however, if you are doing prototypal inheritance some
 other method.
 
 
-```
+```javascript
 const myBase = {
   foo: 12
 }
@@ -115,7 +115,7 @@ try {
 To check whether `my` inherits from `myBase`, you need to use the
 `isPrototypeOf()` function instead:
 
-```
+```javascript
 console.log('myBase is prototype of my:', myBase.isPrototypeOf(my)) // true
 ```
 
@@ -124,7 +124,7 @@ built-in non-primitives. Another way is a bit hackish, but you will see that it
 is surprisingly useful. Every plain object has a `toString()` function. For
 example:
 
-```
+```javascript
 console.log('({n: 12}).toString():', ({n: 12}).toString()) // [object Object]
 ```
 
@@ -133,7 +133,7 @@ information about their type. Since this function is a property on the objects
 themselves, we can access it as `Object.prototype.toString()` (see the
 [proto](./proto.md) module for more information on how this works).
 
-```
+```javascript
 const toString = Object.prototype.toString
 console.log('toString() on [1,2,3]:', toString.call([1, 2, 3])) // [object Array]
 console.log('toString() on /regexp/', toString.call(/regexp/)) // [object RegExp]
@@ -142,7 +142,7 @@ console.log('toString() on new Date()', toString.call(new Date())) // [object Da
 
 Interesting thing about this approach is that it also works on primitive types.
 
-```
+```javascript
 console.log('toString() on true:', toString.call(true)) // [object Boolean]
 console.log('toString() on 1:', toString.call(1)) // [object Number]
 console.log('toString() on "hello":', toString.call('hello')) // [object String]
@@ -155,7 +155,7 @@ between `null` and other objects, so it's a double-win. Since the whole
 business of using `Object.prototype.toString.call()` is a bit too much, we'll
 wrap it in a function and also clean up the output a little.
 
-```
+```javascript
 const what = obj => {
   return Object.prototype.toString.call(obj)
     .replace(/\[object ([^\]]+)\]/, '$1')
@@ -169,7 +169,7 @@ group.
 
 Now let's take this function for a spin:
 
-```
+```javascript
 console.log('what(true):', what(true)) // Boolean
 console.log('what(1):', what(1)) // Number
 console.log('what(null):', what(null)) // Null
@@ -183,13 +183,13 @@ console.log('what(/regexp/):', what(/regexp/)) // RegExp
 
 Perfect! Well... not quite.
 
-```
+```javascript
 console.log('what(1 / 0):', what(1 / 0)) // Number
 ```
 
 Well, clearly 1 divided by 0 cannot be a Number.
 
-```
+```javascript
 console.log('type of 1 / 0:', typeof(1 / 0)) // NaN (but it can also be number)
 ```
 
@@ -214,7 +214,7 @@ Nine out ten times, you can get away with something like `!param` to test
 whether the argument has been passed. But there are cases where this won't
 work. Let's say we have a function that looks like this:
 
-```
+```javascript
 let logNum = num => {
   if (!num) {
     console.log('You did not pass a number')
@@ -230,7 +230,7 @@ logNum(0) // You did not pass a number (oops!)
 
 Let's fix this:
 
-```
+```javascript
 logNum = num => {
   if (num === undefined) {
     console.log('You did not pass a number')
@@ -247,7 +247,7 @@ logNum(0) // You passed 0
 Now let's say our manager comes to us and asks us to implement `logNum()` so
 that it takes an array of numbers and logs them all out.
 
-```
+```javascript
 logNum = num => {
   if (num === undefined) {
     console.log('You did not pass a number')
@@ -274,7 +274,7 @@ you have multiple types you need to test for. In this particular case, using
 Prior to ECMAScript 6, setting default argument values was also done using
 type detection. For instance:
 
-```
+```javascript
 let increment = x => {
   if (x === undefined) x = 0
   return x + 1
@@ -289,7 +289,7 @@ makes sense mathematically in a way, but hardly useful in real life.
 With ES6, it is now possible to specify the default value in the function
 signature:
 
-```
+```javascript
 increment = (x = 0) => x + 1
 ```
 
@@ -305,7 +305,7 @@ as it does in, say, Python. The main reason for this is that trying to access a
 missing property on an object evaluates to `undefined` *without* throwing an
 exception. Here's an example:
 
-```
+```javascript
 const logStuff = thing => console.log('thing.prop ===', thing.prop)
 logStuff({wrongProp: 12}) // undefined
 ```
@@ -316,10 +316,10 @@ think that the solution for this is to test whether the prop is not
 which is to test whether the object has such a key using the `in` operator.
 For example:
 
-```
+```javascript
 my = {}
 console.log('my has "foo" key?', 'foo' in my) // false
-````
+```
 
 If we want the property to be of a specific type, we could also test for that
 type rather than testing that it is not `undefined`. This also makes our code
