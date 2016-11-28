@@ -14,17 +14,20 @@ line of code.
 
 ## Table of contents
 
-- [func](./func.md) - The ins and outs of functions in JavaScript
-- [this](./this.md) - In-depth discussion of the `this` object
+- [func](./func.md) - The ins and outs of functions in JavaScript.
+- [this](./this.md) - In-depth discussion of the `this` object.
 - [proto](./proto.md) - Prototypal inheritance and examples of object creation
-  and inheritance using several different patterns
+  and inheritance using several different patterns.
 - [not-new](./not-new.md) - An implementation of `new` keyword as a JavaScript
   function to demonstrate how instantiating objects using constructors and
-  classes actually works
+  classes actually works.
 - [type-detection](./type-detection.md) - In-depth tour of various type
-  detection techniques in JavaScript
+  detection techniques in JavaScript.
 - [declarative](./declarative.md) - Declarative (functional) programming in
   JavaScript with side-by-side comparison with procedural and OOP styles.
+- [async](./async.md) - Asynchronous programming with continuation passing
+  style, overview of how JavaScript event loop works, and a short intro to
+  promises.
 
 Have a topic you would like to see covered? Use the [issue tracker](
 https://github.com/foxbunny/javascript-by-example/issues) to submit feature
