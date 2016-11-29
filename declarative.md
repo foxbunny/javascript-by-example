@@ -1,4 +1,4 @@
-```
+```javascript
 import {NOTE} from './_util'
 ```
 
@@ -28,7 +28,7 @@ deals with the issues.
 Let's start with a very simple example. We have an array of numbers and we want
 to sum them up, and also calculate their average. The numbers are:
 
-```
+```javascript
 const scores = [4, 2.2, 2, 3, 5.6, 4, 3.8, 4.2]
 ```
 
@@ -45,7 +45,7 @@ something along these lines:
 Let's write the code for the steps we discussed. This is how most programmers
 start when they start programming.
 
-```
+```javascript
 let psum = 0
 let pcount = 0
 for (; pcount < scores.length; pcount++) {
@@ -69,7 +69,7 @@ function which is a much nicer way to loop over it. And I don't need the count
 variable because the array has a length property which gives me the same
 thing!"
 
-```
+```javascript
 let lsum = 0
 scores.forEach(function (n) {
   lsum += n
@@ -84,7 +84,7 @@ The second attempt looks nicer, for sure.
 
 After you learn a bit of Java, you may do this instead:
 
-```
+```javascript
 class Stats {
   constructor(scores) {
     this.count = scores.length
@@ -143,7 +143,7 @@ Let's get started.
 If you think about summing, it is simply a series of additions. And we know
 what addition looks like:
 
-```
+```javascript
 const add = (x, y) => x + y
 ```
 
@@ -152,7 +152,7 @@ way to define the operation of reducing a thing (like a container), using some
 operation (like, say, addition in our case). Let's define how this reduction
 could work in our code:
 
-```
+```javascript
 const reduce = operation => foldable => foldable.reduce(operation)
 ```
 
@@ -168,7 +168,7 @@ were already passed.
 
 Now we can express the sum as a reduction using addition.
 
-```
+```javascript
 const sum = reduce(add)
 ```
 
@@ -190,22 +190,22 @@ complicated here as an exercise.
 For the average we need the sum which we already know how to derive, and we
 also need the count. The count is the length of an array, so:
 
-```
-const count = (x) => x.length
+```javascript
+const count = x => x.length
 ```
 
 To calculate the average of a foldable, we need to divide its sum with
 the count of its elements. We need to describe division as well, so here it
 goes:
 
-```
+```javascript
 const div = (x, y) => x / y
 ```
 
 Now we're ready to state what average is:
 
-```
-const naiveAvg = (foldable) => div(sum(foldable), count(foldable))
+```javascript
+const naiveAvg = foldable => div(sum(foldable), count(foldable))
 ```
 
 We have the average now, but it's somehow wrong. `foldable` is repeated twice,
@@ -227,7 +227,7 @@ would look something like this:
 
 We will first define the transformation for sum and count.
 
-```
+```javascript
 const expand = (...ops) => x => ops.map(op => op(x))
 ```
 
@@ -237,14 +237,14 @@ the operations and return an array of results. Since arrays are foldable, we
 can call div on it. But we can't use our `div()` function as is, as it does not
 work on foldables yet, so we will need to define a new one.
 
-```
+```javascript
 const division = reduce(div)
 ```
 
 It's now time to write the final version of the average function. We just need
 one more little thing. We need a way to combine functions.
 
-```
+```javascript
 const combine = (f, g) => (...args) => f(g(...args))
 const compose = (...fns) => reduce(combine)(fns)
 ```
@@ -258,7 +258,7 @@ later.
 
 And (drumrolls), the average function:
 
-```
+```javascript
 const average = compose(division, expand(sum, count))
 ```
 
@@ -296,7 +296,7 @@ place:
 
 Let's give these a try:
 
-```
+```javascript
 NOTE('Declarative, results:')
 console.log('sum is', sum(scores))
 console.log('average is', average(scores))
