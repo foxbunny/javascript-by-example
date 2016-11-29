@@ -124,7 +124,7 @@ just shifted the code around a bit.
 **NOTE:** Yes, I am just using these examples as strawmen to demonstrate the
 downsides of using procedural and OOP paradigms *for this particular problem*
 and is fully aware that there are valid cases for those paradigms for some
-other problems (which he hopes not to encounter ever in his life).
+other problems (which I hope not to encounter ever in his life).
 
 > And now for something completely different.
 
