@@ -1,8 +1,9 @@
-# JavaScript by example
+# Assimilate JS
 
-This is a collection of JavaScript modules (EcmaScript 2015 edition, to be
-precise) that demonstrate fundamental but non-obvious language concepts to
-novice and not-so-novice JavaScript developers.
+This is a collection of Markdown files that are also literate JavaScript
+modules (EcmaScript 2015 edition, to be precise) that demonstrate fundamental
+but perhaps non-obvious language concepts to novice and intermediate JavaScript
+developers.
 
 Each module in this collection can be read as a guide on a particular topic it
 covers, and can also be executed using NodeJS. You will need to have reasonably
@@ -35,10 +36,16 @@ requests.
 
 ## Getting the sources
 
-To obtain the sources, simply clone [this repository](
+To obtain the sources, simply clone [the repository](
 https://github.com/foxbunny/javascript-by-example/) using git, or [download](
-https://github.com/foxbunny/javascript-by-example/archive/master.zip) it, then
-run this command in the source directory:
+https://github.com/foxbunny/javascript-by-example/archive/master.zip) it.
+
+To clone the repository run:
+
+    git clone https://github.com/foxbunny/javascript-by-example.git
+    cd javascript-by-example
+
+Then run this command in the source directory:
 
     npm install
 
@@ -56,9 +63,8 @@ example, if you wish to run `proto.js`, you would run this command:
 ## Literate modules
 
 The markdown modules are literate JavaScript modules. They are made executable
-with the use of [literatejs](https://github.com/foxbunny/literatejs) program.
-There is some boilerplate code in the [run.js](./run.js) script if you are
-curious.
+using the [literatejs](https://github.com/foxbunny/literatejs) program. There
+is some boilerplate code in the [run.js](./run.js) script if you are curious.
 
 ## License
 
@@ -70,6 +76,8 @@ Please use the [issue tracker](
 https://github.com/foxbunny/javascript-by-example/issues) to report issues with
 the examples or documentation. You are also welcome to submit pull requests
 with fixes or even completely new modules.
+
+Ideas for new topics to cover is also very welcome!
 
 ## About the author
 
