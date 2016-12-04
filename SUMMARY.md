@@ -2,7 +2,7 @@
 
 * [Introduction](README.md)
 
-## Part 1: JavaScript fundamental
+## Part 1: JavaScript fundamentals
 
 * [About functions in JavaScript](func.md)
 * [About `this` and function invocation context](this.md)
