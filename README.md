@@ -24,9 +24,8 @@ are doing has some semblance to what you saw in this book.
 
 Individual sections of this book are written as literate ECMAScript 6 modules.
 This means that the code snippets embedded in the markdown comprise a complete
-working program that can be executed using NodeJS. Please refer to the
-[README file in the source repository](https://github.com/foxbunny/javascript-by-example)
-for instructions on how to run the examples.
+working program that can be executed using NodeJS. Instructions on how to get
+and run the code is outlined further below.
 
 This book is also a work in progress. New chapters are added (almost) every
 week, as my time permits, or as I run into new and interesting topics I wish
