@@ -1,7 +1,6 @@
 # Summary
 
-* [Introduction](intro.md)
-* [Foreword](intro.md)
+* [Introduction](README.md)
 * [About functions in JavaScript](func.md)
 * [About `this` and function invocation context](this.md)
 * [What is prototypal inheritance in JavaScript?](proto.md)
