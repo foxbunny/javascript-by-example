@@ -1,6 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
+* [What JavaScript is and what it isn't](javascript.md)
 
 ## Part 1: JavaScript fundamentals
 
