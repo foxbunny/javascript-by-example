@@ -73,3 +73,16 @@ about it.
 You can tweet to me, `@foxbunny`, [on Twitter](https://twitter.com/foxbunny),
 and read more of the musings, that didn't quite fit this book, [on my
 blog](http://hayavuk.tumblr.com/).
+
+## Acknowledgements
+
+I would like to thank all my friends that gave me with encouragement and
+feedback. In particular, I would like to mention:
+
+- Andrean
+- Manish
+- Ben
+- Abhishek
+- Vitomir
+
+I keep writing this book thanks to these great buddies!

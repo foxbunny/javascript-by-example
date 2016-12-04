@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Introduction](./intro.md)
+* [Foreword](./intro.md)
 
 ## Part I: The JavaScript fundamentals
 

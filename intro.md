@@ -1,4 +1,4 @@
-# Introduction
+# Foreword
 
 This book is certainly not a light introduction to JavaScript. That's not to
 say that this book is not for a novice JavaScript developers. It's going to be
@@ -36,25 +36,3 @@ effort between you, my readers, and me. I encourage you to send me feedback by
 GitHub](https://github.com/foxbunny/javascript-by-example/issues)  or
 commenting directly [on the online version of the
 book](https://foxbunny.gitbooks.io/assimilate-js/content/).
-
-## About the author
-
-I am a long-time web developer with over 8 years of experience programming
-in JavaScript. My relationship with JavaScript has started even before frontend
-engineering was *the* thing, scripting Adobe software using the JavaScript
-scripting API. Although I have also done NodeJS development, my main focus
-nowadays is on frontend engineering. I love JavaScript, and lately also writing
-about it.
-
-## Acknowledgements
-
-I would like to thank all my friends that gave me with encouragement and
-feedback. In particular, I would like to mention:
-
-- Andrean
-- Manish
-- Ben
-- Abhishek
-- Vitomir
-
-I keep writing this book thanks to these great buddies!
