@@ -101,8 +101,8 @@ blog](http://hayavuk.tumblr.com/).
 
 ## Acknowledgements
 
-I would like to thank all my friends that gave me with encouragement and
-feedback. In particular, I would like to mention:
+I would like to thank all my friends that gave me encouragement and feedback.
+In particular, I would like to mention:
 
 - Andrean
 - Manish
