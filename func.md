@@ -87,8 +87,6 @@ functions in an `if` block using function statements, even if the `if`
 condition is not met. You should, therefore, avoid using function statements in
 `if` blocks as it may lead to confusion and subtle bugs.
 
-## Arrow functions
-
 The arrow function form is a new syntax introduced in ECMAScript 6, and the one
 I prefer to use. There are subtle differences between arrow- and non-arrow
 functions in both syntax and semantics, though, and they can't be used
@@ -112,6 +110,8 @@ If you find that your parameter list is becoming a maintenance nightmare,
 consider passing a single object and accessing its properties instead. This is
 especially useful combined with argument destructuring discussed in this
 module.
+
+## Arrow functions
 
 Arrow functions have a few syntax variations depending on the number of
 parameters and/or the complexity of the function body.
