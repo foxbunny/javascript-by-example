@@ -43,7 +43,9 @@ example, if you wish to run `proto.js`, you would run this command:
 
 The markdown modules are literate JavaScript modules. They are made executable
 using the [literatejs](https://github.com/foxbunny/literatejs) program. There
-is some boilerplate code in the [run.js](./run.js) script if you are curious.
+is some boilerplate code in the
+[run.js](https://github.com/foxbunny/javascript-by-example/blob/master/run.js)
+script if you are curious.
 
 ## License
 
