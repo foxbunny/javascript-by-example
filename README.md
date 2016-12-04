@@ -3,24 +3,24 @@
 # About this book
 
 This book is certainly not a light introduction to JavaScript. That's not to
-say that this book is not for a novice JavaScript developers. It's going to be
-overwhelming, but I believe well worth it. Here's why.
+say that this book is not for a novice JavaScript developer. It's going to be
+overwhelming, but hopefully well worth it. Here's why.
 
 The aim of this book is to provide accumulated experience of a working
-JavaScript developer on each and every topic. The layers that build up as you
-progress as a developers are here condensed into a single compact treatment of
-each topic. On the other hand, this book does not try to arrive at conclusions
-the same way you would if you were learning on your own. This is intentional,
-and will hopefully remove some of the confusion and mystery around the concepts
-being discussed.
+JavaScript developer for each and every topic. The layers that build up as you
+progress as a developers are here condensed into a single compact treatment in
+each section. This book does not try to arrive at conclusions the same way you
+would if you were learning on your own, and in doing so, the hope is that some
+of the confusion and mystery around the concepts being discussed would be
+removed.
 
-This book is not meant to be read cover-to-cover. Topics are mostly
+Assimilate JS is not meant to be read cover-to-cover. Topics are mostly
 self-contained, with references to other topics only as needed to understand
 the current one. It is also not meant to be memorized, but read and re-read as
-you run into problems that are covered in each sections. Even if you feel that
-the material is overwhelming, I suggest you mentally bookmark the sections so
-you can get back to them for some later time, when you discover that what you
-are doing has some semblance to what you saw in this book.
+you run into problems that are covered herein. Even if you feel that the
+material is overwhelming, I suggest you mentally bookmark the sections so you
+can get back to them at some later time, when you discover that what you are
+doing has some semblance to what you saw in this book.
 
 Individual sections of this book are written as literate ECMAScript 6 modules.
 This means that the code snippets embedded in the markdown comprise a complete
