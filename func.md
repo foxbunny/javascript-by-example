@@ -31,9 +31,11 @@ use the word 'parameters' to mean 'the names that a function uses to refer
 to values that may be passed to it', and 'arguments' to refer to 'the values
 being passed to a function on invocation'.
 
+## Defining functions
+
 Let's talk about syntax first.
 
-There are three ways to define functions.
+There are four ways to define functions.
 
 - (1) function assigned to a variable or object property (a.k.a. function
   expression)
@@ -84,6 +86,8 @@ In some versions of some JavaScript engines, it is possible to declare
 functions in an `if` block using function statements, even if the `if`
 condition is not met. You should, therefore, avoid using function statements in
 `if` blocks as it may lead to confusion and subtle bugs.
+
+## Arrow functions
 
 The arrow function form is a new syntax introduced in ECMAScript 6, and the one
 I prefer to use. There are subtle differences between arrow- and non-arrow
@@ -150,6 +154,8 @@ const returning = function (x) {
 }
 ```
 
+## Destructuring function arguments
+
 Starting with ES6, function arguments can be destructured using parameters with
 pattern-matching. We'll go over a few examples of how this destructuring works:
 
@@ -181,6 +187,14 @@ const remapsKeys = ({x: foo, y: bar}) => {
 remapsKeys({x: 'x', y: 'y'}) // remapped: x y
 ```
 
+**NOTE:** Although destructuring may seem like a very neat trick, you should
+keep in mind that it may sometimes obfuscate the function signature to the
+point where you cannot recall its original intent. Try thinking about the
+advantages of destructuring arguments on case-by-case basis before you jump on
+using them.
+
+## Default parameter values
+
 As of ES6, default values of parameters can also be specified.
 
 ```javascript
@@ -192,6 +206,8 @@ havingDefault(10) // 10
 NOTE('Invoking havingDefault without an argument')
 havingDefault() // 12
 ```
+
+## Optional arguments and splats
 
 JavaScript functions do not have any restrictions on the number of arguments
 you can pass. You can call the same function with as many or as little
@@ -233,6 +249,8 @@ NOTE('Invoking withSplat(1)')
 withSplat(1) // 1 [ ]
 ```
 
+## Functions as object properties (a.k.a. methods)
+
 You have already seen that function expressions can be assigned to variables.
 They can also be defined as and assigned to object properties. As mentioned,
 there is no difference between defining a callable property using the
@@ -258,6 +276,8 @@ const proprietor2 = {
 NOTE('Invoking proprietor2.prop()')
 proprietor2.prop() // I'm a property
 ```
+
+## Higher-order functions
 
 Functions can be used as arguments to other functions, and returned from them.
 Functions that receive other functions as arguments or return functions (or
@@ -285,6 +305,8 @@ more complex problems without making things much more difficult.
 On the other hand, don't fall into a trap of breaking everything down into tiny
 functions and write a big function using bazillion of them. It ultimately makes
 the code harder to follow.
+
+## Closures
 
 Functions in JavaScript allow us to build closures. When a function is defined
 within another function, the inner function has access to the outer function's
@@ -315,6 +337,8 @@ requester('hamburger') // Request hamburger for bob using code 1234567
 In the above example, the token is generated within `makeRequester()`'s
 closure, and is completely inaccessible to the outside world. This effectively
 makes it tamper-free.
+
+## Immediately-invoked function expressions
 
 Immediately-invoked function expressions (IIFE for short) are function
 expressions that are... well... immediately invoked. A stand-alone (i.e.,
@@ -360,6 +384,8 @@ is assigned to `requester2()`.
 An IIFE is only ever invoked once, so this pattern is commonly used for
 initialization before returning functions or other objects, or to create
 private state that should not be accessible to the outside code.
+
+## Functions are objects
 
 Let me remind you again that JavaScript functions are objects. This is quite
 evident when you start noticing that you can define properties on them.
@@ -468,6 +494,8 @@ There are several more properties like `call()`, `apply()`, or `bind()`, but we
 will only talk about `bind()` in this module. `call()` and `apply()` are
 discussed in the [this](./this.md) module.
 
+## The `bind()` function and partial application
+
 All functions have a `bind()` function. This function is normally used to bind
 non-arrow functions' `this` to some value, but it can also be used to perform
 partial application of functions. For instance:
@@ -497,6 +525,8 @@ NOTE('Calling partially applied onlyNeedsThree')
 onlyNeedsTwo('b', 'c') // a b c
 ```
 
+## Arrow vs non-arrow functions
+
 You may be wondering why there are two kinds of functions in JavaScript (arrow
 and non-arrow). The `function` function has a few characteristics that the
 arrow function does not. Let's take a look at what those are.
@@ -516,7 +546,7 @@ The `this` object is convoluted enough to deserve a module of its own. Please
 refer to [this](./this.md) module for more information.
 
 Furthermore, non-arrow functions can be used as object constructors, a topic
-that is covered in more detail in the [proto](./proto) module.
+that is covered in more detail in the [prototypal inheritance](./proto) module.
 
 As mentioned before, arrow functions *do not have `arguments` and `this` (and
 also some other things that are not that important). Some programmers may tell
@@ -534,8 +564,14 @@ arrow functions if you are willing to forget about `this` and constructors
 or forget about arrow functions. You could always use both, and you should
 definitely *know* both, though.
 
+## In conclusion
+
 Hopefully this gives you enough material to continue exploring programming with
-functions in more detail.
+functions in more detail. Where functions really shine is when you program
+using functional programming style (surprise!). If you are curious about how
+that works, take a look at the [declarative programming](./declarative.md)
+module.
+
 
 ```javascript
 // This function is intentionally hanging down here
