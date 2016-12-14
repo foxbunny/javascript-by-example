@@ -15,7 +15,9 @@
   },
   "dependencies": {
     "async": "^2.1.4",
+    "babel-plugin-transform-flow-strip-types": "^6.18.0",
     "daggy": "0.0.1",
+    "flow-bin": "^0.37.0",
     "literatejs": "0.0.2"
   }
 }

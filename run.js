@@ -11,11 +11,17 @@ function main() {
       return literatejs.write(output, code)
     })
     .then(function () {
+      execSync('flow ' + output, {
+        stdio: [process.stdin, process.stdout, process.stderr]
+      })
       execSync('babel-node ' + output, {
         stdio: [process.stdin, process.stdout, process.stderr]
       })
     })
     .then(function () {
+      fs.unlinkSync(output)
+    })
+    .catch(function () {
       fs.unlinkSync(output)
     })
 }
