@@ -15,3 +15,4 @@
 * [Type detection](type-detection.md)
 * [Declarative programming](declarative.md)
 * [Asynchronous programming](async.md)
+* [Typed Javascript](typed.md)
