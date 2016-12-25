@@ -96,8 +96,8 @@ nowadays is on frontend engineering. I love JavaScript, and lately also writing
 about it.
 
 You can tweet to me, `@foxbunny`, [on Twitter](https://twitter.com/foxbunny),
-and read more of the musings, that didn't quite fit this book, [on my
-blog](http://hayavuk.tumblr.com/).
+and read more of the musings, that didn't quite fit this book, [on
+Medium](https://medium.com/@hayavuk/latest).
 
 ## Acknowledgements
 
