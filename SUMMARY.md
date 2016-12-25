@@ -9,6 +9,7 @@
 * [About `this` and function invocation context](this.md)
 * [What is prototypal inheritance in JavaScript?](proto.md)
 * [How the `new` keyword works](not-new.md)
+* [How and when to use arrays](array.md)
 
 ## Part 2: Programming techniques
 
